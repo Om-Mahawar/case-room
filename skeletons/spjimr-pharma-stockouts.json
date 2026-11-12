@@ -1,0 +1,180 @@
+{
+  "id": "spjimr-pharma-stockouts",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Pharmaceuticals Stockouts",
+  "type": "operations",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "209-211"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "A leading pharmaceutical manufacturer is facing frequent stockouts across key domestic markets despite having adequate annual production capacity. The CEO wants you to diagnose the issue and recommend solutions, without investing in new plants.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Is demand strong, and does capacity on paper exceed it",
+      "reveal": "Correct.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Is demand volatile or declining",
+      "reveal": "No, demand is stable and predictable.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Plant utilisation",
+      "reveal": "Around 85%.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Breakdowns or labour disruptions",
+      "reveal": "No major disruptions.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Transport delays",
+      "reveal": "Transportation is fairly reliable.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Inventory in the system",
+      "reveal": "Overall inventory is slightly higher than last year.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Are stockouts uniform across products",
+      "reveal": "No. Some SKUs are overstocked, others out of stock.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Push model based on forecast",
+      "reveal": "Yes.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "Change in forecast accuracy",
+      "reveal": "It dropped from 88% to 70%.",
+      "kind": "fact"
+    },
+    {
+      "id": "f10",
+      "asks": "Raw-material shortages",
+      "reveal": "Only occasional API delays.",
+      "kind": "fact"
+    },
+    {
+      "id": "f11",
+      "asks": "Are those delays enough to halt high-demand products",
+      "reveal": "Occasionally, yes.",
+      "kind": "fact"
+    },
+    {
+      "id": "f12",
+      "asks": "Single-sourced APIs",
+      "reveal": "For many products, yes.",
+      "kind": "fact"
+    },
+    {
+      "id": "f13",
+      "asks": "Are production plans revised often",
+      "reveal": "Yes. Almost weekly.",
+      "kind": "fact"
+    },
+    {
+      "id": "f14",
+      "asks": "What drives the revisions",
+      "reveal": "Sales keeps adjusting forecasts.",
+      "kind": "fact"
+    },
+    {
+      "id": "f15",
+      "asks": "Multiple products on shared lines",
+      "reveal": "Yes, multiple SKUs run on shared lines.",
+      "kind": "fact"
+    },
+    {
+      "id": "f16",
+      "asks": "After the recommendations",
+      "reveal": "Why not recommend adding more capacity?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Capacity in units",
+    "Number of products",
+    "Inventory value or days",
+    "Plant count",
+    "API names or suppliers",
+    "Cost figures"
+  ],
+  "crux": {
+    "statement": "Inventory up yet stockouts means stock is in the wrong place, not short. Forecast drift drives both product-level misallocation under the push model and weekly rescheduling, which means more changeovers on shared lines and lower effective output for fast movers. Single-sourced APIs are the second cause.",
+    "clue": "\"Overall inventory is slightly higher than last year\", followed by \"some SKUs are overstocked, others out of stock\".",
+    "test": "Remove the inventory rise and the case reads as a supply shortage. Remove the forecast drop and the candidate has no reason for the misallocation."
+  },
+  "paths": [
+    "Demand → supply capacity → distribution (transport, positioning, replenishment logic) → upstream planning (raw materials, schedule stability, yield)"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Demand volatility (ruled out)"
+    },
+    {
+      "id": "w02",
+      "text": "Capacity expansion"
+    },
+    {
+      "id": "w03",
+      "text": "Transport"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "optional": true,
+    "working": "Derived: forecast error rose from 100 − 88 = 12% to 100 − 70 = 30%, which is 2.5 times.",
+    "answer": "Forecast error rose from 12% to 30%, 2.5 times",
+    "inputs": [
+      "88%",
+      "70%"
+    ]
+  },
+  "answerKey": [
+    "Forecasting: a planning cadence with monthly demand lock-in, product-level analytics for fast movers, frozen production windows",
+    "Sourcing: dual sourcing for critical APIs, safety stock for fast movers, secured contracts for the top 20% revenue products",
+    "No new capacity: the problem is instability and misallocation, not total output"
+  ],
+  "close": {
+    "condition": "The candidate has found the forecast issue and looked upstream.",
+    "prompt": "Move to your recommendations."
+  },
+  "anchors": {
+    "s5": "Asks for capacity or capex.",
+    "s7": "Finds the forecast issue.",
+    "s9": "Links \"inventory up yet stockouts\" to misallocation unprompted, finds both causes, and defends no-capex."
+  },
+  "verifierFlags": [
+    {
+      "text": "p209–210 repeat a block of questions; in the first copy \"Are multiple SKUs run on shared lines?\" is answered \"Only occasional API delays\".",
+      "resolved": true,
+      "decision": "Use the second copy: the answer is \"Yes\"."
+    }
+  ]
+}

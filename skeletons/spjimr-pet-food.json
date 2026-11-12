@@ -1,0 +1,152 @@
+{
+  "id": "spjimr-pet-food",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Pet-Food Manufacturer",
+  "type": "market_entry",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "90-92",
+    "firm": "BCG"
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "Your client is a Switzerland-based pet-food manufacturer with a strong presence in Europe and China. They now want to enter India. What would you recommend?",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Objective",
+      "reveal": "To expand reach and grow the business.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Portfolio",
+      "reveal": "Dog and cat food across price tiers.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Constraints on capital, timeline or capacity",
+      "reveal": "None. They are a large company with deep pockets.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Competition in India",
+      "reveal": "Two large players hold about 65% of the market; the remaining 35% is fragmented across small start-ups and local brands.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "After the candidate sizes the market",
+      "reveal": "Does that look attractive enough?",
+      "kind": "probe"
+    },
+    {
+      "id": "f06",
+      "asks": "After market attractiveness",
+      "reveal": "Let's talk about financial viability.",
+      "kind": "probe"
+    },
+    {
+      "id": "f07",
+      "asks": "After financial viability",
+      "reveal": "Now discuss the operational aspects. How do they build credibility?",
+      "kind": "probe"
+    },
+    {
+      "id": "f08",
+      "asks": "After operations",
+      "reveal": "Let's talk about modes of entry.",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [
+    "1.4 bn people; 35% urban; about 100 m urban households",
+    "10% of urban households own pets, so about 10 m pet-owning homes: 8 m dog and 2 m cat",
+    "₹1,000 per pet per month on packaged food",
+    "5% share within three years",
+    "About 35% gross margin when importing; 15–18% marketing and distribution; about 5% overheads",
+    "₹40–60 Cr set-up cost",
+    "Local manufacturing once revenue passes ₹300–400 Cr"
+  ],
+  "outOfScope": [
+    "Market-size data",
+    "Pet-ownership statistics",
+    "Competitor names",
+    "Import duty rates",
+    "Regulations"
+  ],
+  "crux": {
+    "statement": "With no constraints, the question is sequencing, not go or no-go. Enter by importing to test fit and price points, manufacture locally once revenue reaches about ₹300–400 Cr, then consider a joint venture for Tier 2 and 3. In an emotional, high-trust category, credibility (vets, sampling, shelters) is the operational crux.",
+    "clue": "\"No constraints\" tempts a plant on day one. A strong candidate still phases, because Indian price sensitivity and product fit are unknown."
+  },
+  "paths": [
+    "Market attractiveness → financial viability → operational feasibility → mode of entry",
+    "A customer-first or 3C structure that reaches the same four questions"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Local manufacturing from day one \"because money is no object\""
+    },
+    {
+      "id": "w02",
+      "text": "Ignoring that two players hold 65%"
+    }
+  ],
+  "quant": {
+    "kind": "chain",
+    "working": "Candidate-driven sizing: 10 m pet-owning homes × ₹12,000 a year = ₹12,000 Cr. A 5% share = ₹600 Cr revenue. A 12–15% operating margin gives ₹72–90 Cr.",
+    "answer": "About ₹12,000 Cr market; ₹600 Cr revenue at a 5% share",
+    "inputs": [
+      "10 m pet-owning homes",
+      "₹1,000 per pet per month",
+      "5% share"
+    ]
+  },
+  "answerKey": [
+    "A clear go",
+    "Phased mode: import and distribute first, local manufacturing at scale, a joint venture later for smaller cities",
+    "A trust-building plan: vet endorsements, sampling, breeders and shelters",
+    "Hybrid distribution: offline retail and clinics for credibility, online for convenience"
+  ],
+  "close": {
+    "condition": "The candidate has covered attractiveness, viability and mode of entry.",
+    "prompt": "What would be your final recommendation?"
+  },
+  "anchors": {
+    "s5": "Lists entry modes without choosing; no sizing.",
+    "s7": "Sizes the market sensibly and picks a mode with reasons.",
+    "s9": "Sizes and sanity-checks, phases the entry with explicit triggers, and names trust as the binding operational risk."
+  },
+  "verifierFlags": [
+    {
+      "text": "The case-facts box on p92 belongs to a technical-textiles case.",
+      "resolved": true,
+      "decision": "Not loaded. The skeleton is built from the transcript on p90–91."
+    },
+    {
+      "text": "The source converts ₹12,000 Cr to about USD 1.5 bn at roughly ₹80 to the dollar, which is out of date.",
+      "resolved": true,
+      "decision": "The dollar figure is dropped; the case runs in rupees only."
+    },
+    {
+      "text": "Going from 490 m urban people to 100 m households assumes about 4.9 people per household, never stated.",
+      "resolved": true,
+      "decision": "Accept either route. A top answer states its household size."
+    },
+    {
+      "text": "Grade the method, not the figures.",
+      "resolved": true,
+      "decision": "Confirmed: all sizing numbers are the candidate's assumptions; the interviewer supplies none."
+    }
+  ]
+}

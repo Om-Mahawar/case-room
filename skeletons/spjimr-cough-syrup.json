@@ -1,0 +1,164 @@
+{
+  "id": "spjimr-cough-syrup",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "New Cough Syrup (BronchSure)",
+  "type": "pricing",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "148-150",
+    "firm": "Citibank"
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "Your client is a pharmaceutical company that has recently launched a new cough syrup called BronchSure, and they want your help in determining the appropriate pricing.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Company and geography",
+      "reveal": "A mid-sized Indian pharmaceutical company operating pan-India. Strong networks in Maharashtra, Gujarat, Delhi NCR and Karnataka; weaker in the East and South.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Launch plan",
+      "reveal": "A metro-first launch across chemists, modern trade and e-commerce.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Over the counter or prescription",
+      "reveal": "Over the counter in most states; in a few states it is behind the counter, dispensed by the pharmacist.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Competition and substitutes",
+      "reveal": "Four branded over-the-counter syrups dominate, with multiple private-label generics, Ayurvedic syrups and home remedies. Hospitals and bulk buyers purchase multi-pack tendered generics from distributors.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Competitor price, only if the candidate proposes a figure near it",
+      "reveal": "Yes, ₹100–120 per 100 ml is a fair estimate.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Pricing objective",
+      "reveal": "Capture meaningful market share within 18 months while ensuring sustainable margins. Secondary: sign hospital and school tenders in metros and build over-the-counter brand presence in urban pharmacies. Profitability matters but is secondary in the initial year.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "What is different about the product",
+      "reveal": "Moderate but meaningful differentiation: a mixed formulation (an antitussive plus a mucolytic), lower sedation, a paediatric sugar-free variant, good shelf stability and no cold chain.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Regulation",
+      "reveal": "There are regulatory constraints; extremely high pricing is not practical.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "Costs and volume",
+      "reveal": "Variable cost is about ₹30 per 100 ml bottle. Fixed cost is about ₹8 crore of marketing in the first year, of which ₹6 crore is for BronchSure. The forecast is 5 lakh bottles in year 1, subject to seasonal fluctuation.",
+      "kind": "fact"
+    },
+    {
+      "id": "f10",
+      "asks": "Can volume go higher",
+      "reveal": "Yes. If early traction is strong, they can produce and distribute up to 10 lakh bottles in year 1.",
+      "kind": "fact"
+    }
+  ],
+  "acceptedAssumptions": [
+    "A 30–35% manufacturer margin on price",
+    "Strong brands at ₹150–180; private-label generics below ₹90"
+  ],
+  "outOfScope": [
+    "Competitors' names",
+    "Exact competitor prices beyond the confirmed band",
+    "The regulatory price cap",
+    "Channel margin percentages",
+    "Demand elasticity"
+  ],
+  "crux": {
+    "statement": "At the base forecast, cost per bottle (₹150) sits above the mid-range market (₹100–120). The price only works if volume scales, so the share objective and the scale-up are the same lever. Value-based pricing is weak here because over-the-counter buyers cannot verify the clinical edge.",
+    "clue": "The share objective, then the question \"is the company open to scaling?\""
+  },
+  "paths": [
+    "Cost-based with a competitor check (the source's route)",
+    "Competitor-based first, with cost as the floor"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Pure value pricing"
+    },
+    {
+      "id": "w02",
+      "text": "Cost-plus at ₹150 without noticing it is above the market"
+    },
+    {
+      "id": "w03",
+      "text": "Ignoring the tender segment"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "working": "Base case: ₹6 crore ÷ 5 lakh bottles = ₹120 fixed + ₹30 variable = ₹150 a bottle. At 10 lakh bottles: ₹60 + ₹30 = ₹90. With a 30–35% margin on price: 90 ÷ 0.70 ≈ ₹128.6 and 90 ÷ 0.65 ≈ ₹138.5, so about ₹130.",
+    "answer": "₹150 a bottle at 5 lakh; ₹90 at 10 lakh; a launch price of about ₹130",
+    "inputs": [
+      "₹30",
+      "₹6 crore",
+      "5 lakh",
+      "10 lakh",
+      "30–35%"
+    ]
+  },
+  "answerKey": [
+    "A launch price of about ₹130 per 100 ml: above the mid-range, below premium",
+    "The price depends on reaching the 10 lakh volume; say what happens if it does not",
+    "A review after 12–18 months"
+  ],
+  "close": {
+    "condition": "The candidate has both per-unit costs and a price with a competitor check.",
+    "prompt": "What price do you recommend, and why?"
+  },
+  "anchors": {
+    "s5": "Picks a method without data; arithmetic slips.",
+    "s7": "Works out both per-unit costs and lands a defensible price with a competitor check.",
+    "s9": "Sees that the base-case cost is above the market, ties the scale-up to the share goal, and raises channel margins and the tender segment."
+  },
+  "verifierFlags": [
+    {
+      "text": "\"Mid-sized\" and \"one of the top 5\" appear in the same answer.",
+      "resolved": true,
+      "decision": "Use \"mid-sized\"; the summary page says the same. \"Top 5\" is dropped."
+    },
+    {
+      "text": "The ₹150–180 strong-brand and below-₹90 generic bands come from the candidate, not the interviewer.",
+      "resolved": true,
+      "decision": "Kept as accepted assumptions. The interviewer confirms only the ₹100–120 mid-range band."
+    },
+    {
+      "text": "The source treats manufacturer price as the retail price, though distributor and retailer margins would sit on top.",
+      "resolved": true,
+      "decision": "Keep the book's logic: ₹130 is the retail price. Raising channel margins is credited at the top anchor."
+    },
+    {
+      "text": "The summary page carries an EV-pricing prompt, \"Battery longevity\" and the misspelling \"BranchSure\".",
+      "resolved": true,
+      "decision": "Ignored. The skeleton is built from the transcript."
+    }
+  ]
+}

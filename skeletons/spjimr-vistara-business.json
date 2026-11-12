@@ -1,0 +1,156 @@
+{
+  "id": "spjimr-vistara-business",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Business-class fare on a domestic route (Vistara)",
+  "type": "pricing",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "153-154",
+    "note": "The book names Vistara, Air India and Jet. Reset here as an unnamed premium airline because Jet stopped flying in 2019 and Vistara merged into Air India in November 2024."
+  },
+  "confidence": "low",
+  "runMode": "drill",
+  "prompt": "How should a premium full-service airline price its business-class ticket on a domestic route? Start wherever you think is appropriate.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Customer segment",
+      "reveal": "Mostly business travellers.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "When the candidate first asks about the customer segment",
+      "reveal": "Why do you need to know that?",
+      "kind": "probe"
+    },
+    {
+      "id": "f03",
+      "asks": "Positioning",
+      "reveal": "A premium full-service airline: newer aircraft, more consistent business-class cabins, and higher service quality than most competitors on this route.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Competitors offering business class",
+      "reveal": "It depends on the flight timing: one full-service rival on some slots, another on others. Does that matter?",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Route",
+      "reveal": "Mumbai–Delhi.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Benchmark fare",
+      "reveal": "Economy is ₹10,000.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Seat configuration",
+      "reveal": "128 economy seats and 24 business seats.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "When the candidate lists cost, value and competition as approaches",
+      "reveal": "Do all three apply here?",
+      "kind": "probe"
+    },
+    {
+      "id": "f09",
+      "asks": "After the candidate gives fares by time of day",
+      "reveal": "Is the time of day the only factor you would consider to determine demand?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [
+    "Business class gives 2–3 productive hours, worth ₹3,000–5,000 to someone earning ₹20–30 lakh a year",
+    "Competitor business fares of ₹20,000–25,000"
+  ],
+  "outOfScope": [
+    "Airline costs",
+    "Load factors",
+    "Actual competitor fares",
+    "Booking-curve data",
+    "Anything about real airlines beyond the facts given"
+  ],
+  "crux": {
+    "statement": "Cost cannot guide the price. Triangulate value and competition, and vary the fare by time slot and season, because competitive intensity depends on who flies that slot.",
+    "clue": "\"It depends on the flight timing.\" That signals slot-based pricing."
+  },
+  "paths": [
+    "Rule out cost → value to a business traveller → competitive band → fare by slot and season"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Cost-plus pricing"
+    },
+    {
+      "id": "w02",
+      "text": "One fare for every flight"
+    },
+    {
+      "id": "w03",
+      "text": "Ignoring the competitive band"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "optional": true,
+    "working": "Rough check on the candidate's own inputs: ₹25 lakh a year over about 2,000 working hours ≈ ₹1,250 an hour; × 2.5 hours ≈ ₹3,100, the low end of the ₹3,000–5,000 range. Added to the ₹10,000 economy fare this supports about ₹13,000–15,000 on time value alone, so the competitive band, not time value, sets the fare.",
+    "answer": "Time value is roughly ₹3,100 a flight, or about ₹13,000–15,000 with the economy fare",
+    "inputs": [
+      "₹10,000",
+      "₹20–30 lakh",
+      "2–3 productive hours"
+    ]
+  },
+  "answerKey": [
+    "A range, not one number, set inside the competitive band with a modest premium",
+    "Higher fares on morning and evening peak slots than at mid-day, with the reason",
+    "A seasonal lift at festivals, long weekends and year-end"
+  ],
+  "close": {
+    "condition": "The candidate has ruled out cost and proposed a fare or range.",
+    "prompt": "So what fares would you set, and how would they vary?"
+  },
+  "anchors": {
+    "s5": "One number, no method.",
+    "s7": "Rules out cost, uses value and competition, gives a range.",
+    "s9": "Prices by slot and season, explains why, and checks the value logic against the economy fare."
+  },
+  "verifierFlags": [
+    {
+      "text": "Dated: Jet Airways stopped flying in 2019 and Vistara merged into Air India in November 2024.",
+      "resolved": true,
+      "decision": "Reset as an unnamed premium full-service airline with two unnamed full-service rivals. The book's names stay in the source note only."
+    },
+    {
+      "text": "The book's ₹30,000 \"value ceiling\" does not follow from the inputs given.",
+      "resolved": true,
+      "decision": "Dropped from the expected logic. No answer is graded against ₹30,000, and the book's ₹22,000–28,000 fares are not treated as the right answer."
+    },
+    {
+      "text": "Competitor fares of ₹20,000–25,000 are the candidate's assumption, listed as a fact on the summary page.",
+      "resolved": true,
+      "decision": "Kept as an accepted assumption. The interviewer does not supply competitor fares."
+    },
+    {
+      "text": "The book's last probe asks whether \"day of the week\" is the only factor, though the candidate had priced by time of day.",
+      "resolved": true,
+      "decision": "Reworded to \"time of day\" so the probe follows from the candidate's answer."
+    }
+  ]
+}

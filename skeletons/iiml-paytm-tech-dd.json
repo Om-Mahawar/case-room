@@ -1,0 +1,107 @@
+{
+  "id": "iiml-paytm-tech-dd",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Paytm technical due diligence",
+  "type": "m_and_a",
+  "source": {
+    "book": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences",
+    "pages": "137-138",
+    "firm": "EY-Parthenon",
+    "note": "Real interview write-up; the case was built on the candidate's 45 months at Paytm. Best for users with a tech or fintech background."
+  },
+  "confidence": "low",
+  "runMode": "drill",
+  "prompt": "Suppose a company wants to acquire Paytm. Perform technical due diligence for the same.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Anything about the acquirer, the deal or Paytm",
+      "reveal": "Nothing beyond the prompt. Sounds good, go ahead.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "After the candidate lists the heads",
+      "reveal": "How would you prioritise these findings?",
+      "kind": "probe"
+    },
+    {
+      "id": "f03",
+      "asks": "After the priorities",
+      "reveal": "Any final thoughts?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Any number",
+    "The acquirer's identity and goals",
+    "Any real-world claim about Paytm's systems, regulators, licences or history"
+  ],
+  "crux": {
+    "statement": "Structure and prioritisation for a fintech target, in business language. The round tests whether the candidate can turn a technical topic into a prioritised, decision-ready list for an acquirer.",
+    "clue": "\"How would you prioritise these findings?\""
+  },
+  "paths": [
+    "Any mutually exclusive set of heads (systems, processes, integration, security, intellectual property, compliance) followed by a priority order tied to the acquirer's goal"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Going deep into technical detail"
+    },
+    {
+      "id": "w02",
+      "text": "Listing heads with no priority"
+    },
+    {
+      "id": "w03",
+      "text": "Inventing facts about Paytm"
+    }
+  ],
+  "quant": {
+    "kind": "none"
+  },
+  "answerKey": [
+    "IT systems: scalability, reliability and security of the payments, wallet, UPI and financial-product backends; cloud and disaster recovery",
+    "Processes: integration with banks, merchants and gateways; compliance for financial data; redundant workflows",
+    "Integration capabilities: interfaces, fit with the acquirer's ecosystem, data-migration feasibility",
+    "Cybersecurity: penetration tests, incident response, encryption, breach history",
+    "Innovation and research: for example fraud detection, patents",
+    "Compliance and regulation: data protection, wallet and financial-services norms, pending technology-related legal issues",
+    "The source's priority order: IT systems and integration first, then cybersecurity and compliance, then innovation and scalability"
+  ],
+  "close": {
+    "condition": "The candidate has listed heads and a priority order.",
+    "prompt": "Summarise your priorities and name the one finding that would stop the deal."
+  },
+  "anchors": {
+    "s5": "A list of jargon with no priorities.",
+    "s7": "Mutually exclusive heads plus a priority order.",
+    "s9": "Priorities tied to the acquirer's goal (integration and risk), plain business language, and a split between deal-breakers and fixable issues."
+  },
+  "verifierFlags": [
+    {
+      "text": "The case was built on the candidate's own work experience.",
+      "resolved": true,
+      "decision": "Offered to everyone as a drill, with a note that it suits a tech or fintech background. Swapping in another company is not built for the pilot."
+    },
+    {
+      "text": "It names a real company.",
+      "resolved": true,
+      "decision": "Kept, with a strict out-of-scope rule: the interviewer adds no real-world fact about Paytm."
+    },
+    {
+      "text": "The same interview began with a flights-over-Lucknow guesstimate.",
+      "resolved": true,
+      "decision": "Not built for the pilot."
+    }
+  ]
+}

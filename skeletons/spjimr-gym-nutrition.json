@@ -1,0 +1,145 @@
+{
+  "id": "spjimr-gym-nutrition",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Gym chain buys a nutrition firm",
+  "type": "m_and_a",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "160-161",
+    "firm": "Deloitte USI"
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "Your client is a premium chain of gyms operating across India. It is considering acquiring a nutrition-focused food manufacturer and retailer that offers pre-cooked and semi-cooked meals. The client believes there are synergies in this acquisition. Should it go ahead? Why or why not?",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Client's geography",
+      "reveal": "The client operates only in India.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Client's customers",
+      "reveal": "The gyms are premium and cater largely to high-income customers.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Target's geography",
+      "reveal": "The target operates in India.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Target's place in the value chain",
+      "reveal": "It manufactures and retails nutrition-focused food products, mainly pre-cooked and semi-cooked meals.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Industry growth and competition",
+      "reveal": "You can assume the industry is growing and there is no immediate competitive threat.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "After the candidate covers cost synergies",
+      "reveal": "Where do you see the bigger upside: cost or revenue?",
+      "kind": "probe"
+    },
+    {
+      "id": "f07",
+      "asks": "After revenue synergies",
+      "reveal": "Would expansion into new geographies be part of the synergy story?",
+      "kind": "probe"
+    },
+    {
+      "id": "f08",
+      "asks": "After financial synergies",
+      "reveal": "How are these financial synergies different from cost synergies?",
+      "kind": "probe"
+    },
+    {
+      "id": "f09",
+      "asks": "After that distinction",
+      "reveal": "And how does this translate into valuation?",
+      "kind": "probe"
+    },
+    {
+      "id": "f10",
+      "asks": "After a go or no-go",
+      "reveal": "What execution risks could prevent value capture?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Deal price",
+    "Revenue or EBITDA of either firm",
+    "Member count",
+    "Store or gym count",
+    "Valuation multiples"
+  ],
+  "crux": {
+    "statement": "The deal rests on revenue synergies from a captive, high-income, health-conscious member base: meal subscriptions upsold to members, gym-plus-nutrition bundles that lift retention and lifetime value, nutrition outlets as an acquisition channel for gyms, and in-gym counters or cafés. Cost synergies (no capex to build kitchens, shared finance, HR and procurement, raw-material bargaining) are secondary.",
+    "clue": "\"Where do you see the bigger upside: cost or revenue?\"",
+    "test": "Remove \"premium gyms, high-income customers\" and the cross-sell thesis loses its base. Remove \"no immediate competitive threat\" and the candidate has to defend the market first."
+  },
+  "paths": [
+    "Three layers: operating synergies (cost, then revenue) → financial synergies (cost of capital) → valuation impact → go or no-go",
+    "Strategic fit first, reaching the same three layers"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Anchoring the thesis on new geographies (opening gyms is capital-heavy; the source treats it as secondary)"
+    },
+    {
+      "id": "w02",
+      "text": "Treating financial synergies as cost synergies"
+    },
+    {
+      "id": "w03",
+      "text": "A synergy list with no ranking"
+    }
+  ],
+  "quant": {
+    "kind": "none"
+  },
+  "answerKey": [
+    "Financial synergies leave operations alone: more stable, diversified cash flows lower the cost of debt and, over time, the cost of equity",
+    "Valuation: higher, steadier cash flows plus a lower cost of capital raise enterprise value; an integrated wellness platform can support a higher multiple",
+    "Go, with conditions",
+    "Execution risks: poor in-gym integration, weak cross-selling by staff, wrong pricing or bundling",
+    "Mitigations: phased rollout, staff training, pilot bundles, a clear owner for synergy capture"
+  ],
+  "close": {
+    "condition": "The candidate has ranked the synergies and given a go or no-go.",
+    "prompt": "Can you summarise your recommendation?"
+  },
+  "anchors": {
+    "s5": "A generic synergy list with no ranking and no recommendation.",
+    "s7": "Ranks revenue over cost with reasons and gives a go or no-go.",
+    "s9": "Ties every synergy to the captive member base, separates the operating, financial and valuation layers, and gives conditions and risks with the recommendation."
+  },
+  "verifierFlags": [
+    {
+      "text": "No numbers in the source: add a member count and attach rate to size the revenue synergy?",
+      "resolved": true,
+      "decision": "No. Nothing is added without a source; the case stays qualitative and the quantitative dimension is not assessed."
+    },
+    {
+      "text": "The interviewer reveals very little; most of the content is the candidate's thesis.",
+      "resolved": true,
+      "decision": "Kept as a full case driven by the five probes. Confidence stays medium."
+    }
+  ]
+}

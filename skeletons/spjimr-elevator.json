@@ -1,0 +1,150 @@
+{
+  "id": "spjimr-elevator",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Elevator Manufacturer",
+  "type": "operations",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "199-201",
+    "firm": "Kearney"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Your client is a 40-year-old elevator manufacturer in India. Historically they make almost everything in-house: cabins, doors, rails and so on. Over the last couple of years they have started facing manufacturing-related challenges, and the CEO has asked for your help.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Demand side, or supply and internal operations",
+      "reveal": "Demand has been stable and customer satisfaction on quality remains strong.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Industry-wide or specific to the client",
+      "reveal": "The issues are internal and specific to the company.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "What the problem looks like",
+      "reveal": "Over the last two years procurement costs have gone up by roughly 20%, and factory utilisation has become uneven: some processes are heavily bottlenecked while some lines are underused.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Components used",
+      "reveal": "Mechanical assemblies (rails, guide systems, pulleys, drive mechanisms); electrical and electronics (control panels, PCB boards, wiring assemblies, sensors); and metal structures (cabin bodies, doors, frames, safety enclosures).",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Share made in-house",
+      "reveal": "Currently 90% of these are manufactured in-house, because \"we always did it that way\".",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Internal cost against outside vendors",
+      "reveal": "For metal frames and cabins, external suppliers are 25% cheaper at the same quality. For control systems and safety assemblies, vendors exist but supply is concentrated and expensive; internal production is already competitive.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "After the candidate proposes a make-or-buy split",
+      "reveal": "It looks fine, but can you please elaborate your approach?",
+      "kind": "probe"
+    },
+    {
+      "id": "f08",
+      "asks": "After the procurement approach",
+      "reveal": "Can you quantify the potential savings, for example for metal fabrication? Make genuine assumptions as required.",
+      "kind": "probe"
+    },
+    {
+      "id": "f09",
+      "asks": "In-house operations and where the bottlenecks are",
+      "reveal": "There are bottlenecks at two main places: the motor assembly line, which is slower and requires skilled labour, and the final testing station, where testing takes a long time. Meanwhile cabins are being produced faster and piling up in inventory.",
+      "kind": "fact"
+    },
+    {
+      "id": "f10",
+      "asks": "Anything else, after the bottleneck fixes",
+      "reveal": "There is one additional problem: the inventory sitting period is high. What are your suggestions for it?",
+      "kind": "fact"
+    }
+  ],
+  "acceptedAssumptions": [
+    "Metal fabrication is about 35% of material cost",
+    "Material cost is about 50% of revenue"
+  ],
+  "outOfScope": [
+    "Revenue",
+    "Margins",
+    "Volumes",
+    "Headcount",
+    "Inventory days",
+    "Capex figures",
+    "Vendor names"
+  ],
+  "crux": {
+    "statement": "One legacy habit causes two problems. Make or buy: outsource high-volume, non-differentiating metal fabrication and keep safety and control systems in-house; segment categories, judge total cost rather than unit price, and move from spot buying to performance-linked contracts. Line imbalance: cabins outrun the motor and testing constraints, so faster cabin output only builds inventory.",
+    "clue": "\"Cabins are being produced faster and piling up in inventory.\"",
+    "test": "Remove \"25% cheaper, same quality\" and the make-or-buy call has no basis. Remove the cabin pile-up and the bottleneck reads as a capacity shortage."
+  },
+  "paths": [
+    "Procurement optimisation → production and factory efficiency → inventory (the source's route)",
+    "Start from the shop floor, then reach make-or-buy"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Hunting on the demand side"
+    },
+    {
+      "id": "w02",
+      "text": "Outsourcing everything, including safety"
+    },
+    {
+      "id": "w03",
+      "text": "Building a new plant or adding capacity"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "working": "0.25 × 0.35 = 8.75% off material cost. Material is about 50% of revenue, so 8.75% × 0.5 = about 4.4 percentage points of margin. The source says 4–5 points.",
+    "answer": "About 8.75% of material cost, or about 4.4 percentage points of margin",
+    "inputs": [
+      "25%",
+      "35%",
+      "50%"
+    ]
+  },
+  "answerKey": [
+    "Outsource metal cabins and frames selectively; keep strategic and supply-risky items in-house",
+    "Bottlenecks: schedule cabins to the motor and testing constraint, add test rigs, cross-train labour, preventive maintenance on the motor line",
+    "Inventory: segment by criticality, sales and operations planning, forecast-based buying, vendor-managed inventory for standard parts, which frees working capital"
+  ],
+  "close": {
+    "condition": "The candidate has addressed both procurement and the line imbalance.",
+    "prompt": "What are your final recommendations for the owner?"
+  },
+  "anchors": {
+    "s5": "Generic cost-cutting.",
+    "s7": "The make-or-buy split plus the savings maths.",
+    "s9": "Both problems, with the bottleneck logic stated (throughput is set by the constraint), the saving quantified, and the inventory and working-capital link made."
+  },
+  "verifierFlags": [
+    {
+      "text": "The summary page (p201) opens with a Domino's revenue prompt.",
+      "resolved": true,
+      "decision": "Ignored; it belongs to another case."
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "id": "spjimr-water-bottles",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Water bottles in a 5-star hotel",
+  "type": "guesstimate",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "27-28",
+    "firm": "General Electric"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Please estimate the number of water bottles used in a 5-star hotel in a day.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Hotel size, before the candidate has named a proxy",
+      "reveal": "How do you generally estimate the size of a hotel?",
+      "kind": "probe"
+    },
+    {
+      "id": "f02",
+      "asks": "Hotel size, once the candidate proposes rooms as the proxy",
+      "reveal": "Yes. Assume the hotel has 100 rooms.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Occupancy, when first raised",
+      "reveal": "Do you think occupancy would be constant throughout the year? What factors influence seasonality?",
+      "kind": "probe"
+    },
+    {
+      "id": "f04",
+      "asks": "Occupancy, after the candidate has discussed seasonality",
+      "reveal": "Assume an average occupancy of 70% over the year.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Guests per occupied room, if the candidate proposes 2",
+      "reveal": "That sounds reasonable.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Bottles per guest per day, if the candidate proposes a figure",
+      "reveal": "Alright, go ahead with that.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Restaurant footfall",
+      "reveal": "Assume the hotel has 2 restaurants. Estimate the rest.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Conferences",
+      "reveal": "Yes. Assume the hotel has conference facilities.",
+      "kind": "fact"
+    }
+  ],
+  "acceptedAssumptions": [
+    "2 guests per occupied room; 2 bottles per guest per day",
+    "25 tables per restaurant, 2 turns a day, 2 guests per table, 1 bottle per cover",
+    "3 conference rooms, 2 in use a day, 40 attendees per event, 1 bottle each",
+    "1.5 staff per room, so 150 staff; 1 bottle per staff member per shift"
+  ],
+  "outOfScope": [
+    "Real hotel data",
+    "Staff counts",
+    "Minibar policy",
+    "Event calendars"
+  ],
+  "crux": {
+    "statement": "Demand-centre segmentation decides the grade: direct (rooms), indirect (restaurants and events) and internal (staff), with rooms as the size proxy and awareness that occupancy moves with the season.",
+    "clue": "\"How do you generally estimate the size of a hotel?\""
+  },
+  "paths": [
+    "Bottom-up by demand centre: rooms, restaurants, conferences, staff",
+    "Any structure that covers guests, food and beverage, events and staff"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "A population-down approach"
+    },
+    {
+      "id": "w02",
+      "text": "Forgetting staff or events"
+    },
+    {
+      "id": "w03",
+      "text": "Ignoring occupancy"
+    }
+  ],
+  "quant": {
+    "kind": "chain",
+    "working": "The source's chain: rooms 100 × 70% × 2 × 2 = 280. Restaurants 2 × 25 × 2 × 2 = 200. Conferences 2 × 40 = 80. Staff 150 × 1 = 150. Total 710 bottles a day. Sanity check, derived: 710 ÷ 100 rooms is about 7 bottles per room, or about 10 per occupied room.",
+    "answer": "One reasonable result: 710 bottles a day. Grade the approach, never the distance from this figure.",
+    "inputs": [
+      "100 rooms",
+      "70%",
+      "2 restaurants"
+    ]
+  },
+  "answerKey": [
+    "A total with its four buckets",
+    "The biggest assumption named",
+    "How the figure moves in peak and lean seasons"
+  ],
+  "close": {
+    "condition": "The candidate has totalled at least three demand buckets.",
+    "prompt": "What's your final estimate, and which assumption matters most?"
+  },
+  "anchors": {
+    "s5": "Rooms only.",
+    "s7": "All four buckets with clean maths.",
+    "s9": "All buckets plus occupancy and seasonality reasoning, a sanity check, and a note on the biggest assumption."
+  },
+  "verifierFlags": [
+    {
+      "text": "The summary slide lists the candidate's 1.5 staff per room as a case fact.",
+      "resolved": true,
+      "decision": "Only 100 rooms, 70% occupancy, 2 restaurants and the conference facilities are interviewer facts. Everything else is an accepted assumption."
+    },
+    {
+      "text": "\"1 bottle per shift\" × 150 staff assumes 150 is total staff across all shifts.",
+      "resolved": true,
+      "decision": "Accepted as it stands. A top answer says so."
+    }
+  ]
+}

@@ -1,0 +1,423 @@
+CASE ROOM: CLAUDE CODE PROMPTS, STAGE BY STAGE
+
+How to use: start Claude Code in the unzipped case-room folder. Use one fresh session per stage.
+Paste everything between the START and END lines of a stage. Do not move on until its gate is met.
+Full notes are in docs/BUILD_PLAN.md.
+
+==============================================================================
+STAGE 0: REPOSITORY
+==============================================================================
+BEFORE YOU PASTE: unzip the folder, install Node 22 and the GitHub CLI, and sign in with gh auth login.
+
+----- START OF PROMPT -----
+This folder is the start of Case Room. Read CLAUDE.md, README.md and docs/DECISIONS.md first.
+
+Task: put this folder under git and publish it as a public GitHub repository named case-room.
+
+1. Run npm install and npm run check. Everything must pass before anything else. If it does
+   not, stop and tell me what failed.
+2. Check that no secret, key or casebook text is in the folder (CLAUDE.md, hard rules 1 and 5).
+3. git init, one initial commit on main, then create the public repository with the gh CLI and
+   push.
+4. Confirm the GitHub Actions workflow in .github/workflows/ci.yml runs and passes.
+5. Create docs/PROGRESS.md with one line per stage of docs/BUILD_PLAN.md, and mark stage 0 done
+   with today's date.
+
+Do not add features, dependencies or files beyond these. Show me your plan before you start, and
+finish by giving me the repository URL and the CI result.
+----- END OF PROMPT -----
+
+GATE: the repository is public, CI is green.
+
+==============================================================================
+STAGE 1: THE GEMINI PROBE (M0)
+==============================================================================
+BEFORE YOU PASTE: open m0/index.html in Chrome, paste a free Gemini key, run sections 1 to 3 (and 4 if you can spare 20 requests), fill in section 5 from AI Studio's rate-limit page, and copy the report. docs/M0.md has the steps.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, docs/M0.md and section 15 of docs/BRD-engineering.md.
+
+I have run the M0 probe. The report is pasted below this prompt.
+
+1. Write the findings into docs/M0.md under "Findings": date, models tested, which request
+   variant worked on each (schema, json or plain), tokens per turn including thinking tokens,
+   which thinking setting was accepted, the shape of the limit error, the real limits I typed
+   in, and any rule the model broke in the three turns.
+2. Compare each finding with what docs/BRD-engineering.md assumed in sections 5.2, 15 and 18,
+   and list every difference in a short table: assumption, finding, what changes.
+3. Create config/models.ts: an ordered model list for the interviewer and for the grader, the
+   request variant to use, the thinking setting, the per-case request budget (18) and the turn
+   budgets. Use only model ids that appear in the report.
+4. If browser calls failed, or no Flash-class model is free on this key, STOP: write a clear
+   no-go note in docs/M0.md with the options, and build nothing.
+5. If an interviewer turn broke a rule (wrong fact, a number not in the case, the crux given
+   away), do not tune the prompt yet; record it for stage 5.
+6. Update docs/PROGRESS.md and commit.
+
+Show me the differences table before you write config/models.ts.
+
+PROBE REPORT:
+<paste the report here>
+----- END OF PROMPT -----
+
+GATE: docs/M0.md has findings and an explicit go or no-go. If it is a no-go, come back to Claude (the chat) with the report before spending more time.
+
+==============================================================================
+STAGE 2: APP SHELL AND MODEL CLIENT
+==============================================================================
+BEFORE YOU PASTE: nothing.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, docs/M0.md (findings), config/models.ts, and sections 12, 15.2, 17 and 23 of
+docs/BRD-engineering.md.
+
+Build the application shell and the model client. No interview logic yet.
+
+1. Add Vite, React and TypeScript (strict), React Router and Tailwind CSS to this repository
+   without disturbing what is here: skeletons/, src/schema, src/engine, scripts/, m0/ and the
+   existing tests must keep working, and npm run check must still pass.
+2. src/llm/: an LlmClient interface with one method,
+   generate({ model, system, messages, schema, maxOutputTokens, temperature }) returning
+   { json, text, usage, modelUsed }. Then:
+   - GeminiClient: plain fetch to generativelanguage.googleapis.com with only Content-Type and
+     x-goog-api-key headers; no SDK; uses the request variant and thinking setting recorded in
+     config/models.ts; walks the ordered model list on "model not found" or a daily-limit error.
+   - A typed error for each row of the response table in section 15.2 of the spec, built from
+     the real error shape recorded in docs/M0.md.
+   - MockClient that replays scripted turns, for tests.
+3. A request counter per model per day (the day rolls over at midnight Pacific time) and token
+   totals, kept in memory for now behind a small interface.
+4. A placeholder home screen that lists the cases from skeletons/index.json with title, type,
+   source, confidence, run mode and the "AI-checked" label. No case content beyond that.
+5. A content-security policy that allows connections only to Google's API host, and no
+   third-party scripts or fonts.
+6. Unit tests with a mocked fetch: success, invalid JSON, bad key, model not found falls
+   through to the next model, per-minute limit retried once, daily limit falls through then
+   reports the reset time, network failure retried twice. The key must never appear in a URL,
+   a thrown error message or a log line; test that.
+
+Not in this stage: the session engine, any screen other than the placeholder, storage, the
+grader. Show me your plan and the file list first. Finish with npm run check passing, a commit,
+and an update to docs/PROGRESS.md.
+----- END OF PROMPT -----
+
+GATE: npm run dev shows the 16 cases; client tests pass.
+
+==============================================================================
+STAGE 3: INTERVIEW ENGINE (LOGIC ONLY)
+==============================================================================
+BEFORE YOU PASTE: nothing.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, prompts/interviewer.md, src/engine/numbers.ts, src/engine/skeletonView.ts,
+src/schema/skeleton.ts, and sections 7.2, 7.3, 8, 9.3, 10.1 and 12 of docs/BRD-engineering.md.
+Read docs/DECISIONS.md: the number check is stricter than the spec, and that is intended.
+
+Build the interview engine as pure TypeScript with no React, driven entirely by tests against
+MockClient. No screen in this stage.
+
+Write the tests first; they are the specification.
+
+1. Session state: Ready, Interviewing, Closing, Grading, Scored, plus Paused and NotScored.
+   A reducer (or equivalent) moves between them. Record on each session: skeleton id and
+   version, prompt version, model ids, app version, messages, ledger, usage.
+2. Ledger: turn number, facts revealed, nudges used, wrong turns seen, crux reached, close
+   issued, running note. Updated only from a valid InterviewerTurn; a fact id that is not in
+   the skeleton is ignored; nudges are capped at two.
+3. Prompt builder (spec 10.1): rules, skeleton view, style line, ledger, last six messages.
+   Older messages are not sent.
+4. One turn (spec 7.3), exactly in that order. In particular:
+   - BR-1: the opening prompt is the skeleton's prompt, with no model call.
+   - BR-4: run the number check on every reply. On failure regenerate once, naming the
+     number; on a second failure replace the reply with the out-of-scope sentence. At most
+     two regenerations per session.
+   - BR-11: trim a reply over 120 words.
+   - BR-12: pass a warning to the model at turn 12; after the last budgeted turn the engine
+     issues the closing prompt itself with no model call. Drills use 6 turns, full cases 14.
+     "Wrap up now" issues the closing prompt immediately.
+   - BR-13: after the recommendation the engine prints "Thanks, that's all I need." with no
+     model call and moves to Grading.
+   - INT-9: if the reply is not valid JSON, show its text and leave the ledger unchanged.
+   - INT-8: on a limit or network error the session moves to Paused and loses nothing.
+5. A hard cap of 18 requests per case, enforced in the engine.
+6. Tests: every rule above; a stalling candidate reaches the closing prompt at exactly the
+   budget (T-END); a bad reply is caught and replaced (T-NUM); a session serialised to JSON
+   and restored continues at the same turn (T-RES); request and token totals are recorded
+   (T-BUD on mock data).
+
+Do not change the skeleton JSON files or prompts/interviewer.md in this stage. If a rule in the
+spec is ambiguous, stop and ask rather than guess. Show me the test list before writing the
+engine. Finish with npm run check passing, a commit, and docs/PROGRESS.md updated.
+----- END OF PROMPT -----
+
+GATE: engine tests pass; no React import anywhere under src/engine.
+
+==============================================================================
+STAGE 4: INTERVIEW SCREEN, SAVING AND RESUMING
+==============================================================================
+BEFORE YOU PASTE: have a Gemini key ready to try it in the browser.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, sections 9.1, 9.3, 11 and 16 of docs/BRD-engineering.md, and the engine built
+in stage 3.
+
+Build the smallest screens that let a person play a case for real.
+
+1. Storage: sessions in IndexedDB through the idb library; settings and the key in
+   localStorage, or in memory only if "remember on this device" is unticked. One storage
+   module; nothing else touches IndexedDB or localStorage directly.
+2. A minimal key screen: paste, test with one small request, show "works", "invalid key" or
+   "quota reached". Show only the last four characters afterwards.
+3. Case start screen: title, source and page, run mode, the request estimate. No case content.
+4. Interview screen: the chat, a timer, "turn N of 14" (or 6), "Wrap up now", and a clear
+   message with a retry button when the session is Paused, including the time the daily limit
+   resets, computed from midnight Pacific time, shown in the user's own time zone.
+5. Closing the tab mid-case and reopening resumes at the same turn. Test it.
+6. After the sign-off, show a plain "Grading comes in stage 6" screen with the saved
+   transcript. No grader yet.
+7. Phone first: usable at 360 px wide, keyboard accessible, visible focus.
+
+Never show any skeleton field other than the prompt before the case ends. Do not add
+analytics, external fonts or third-party scripts. Show me your plan first. Finish with
+npm run check passing, a commit, and docs/PROGRESS.md updated; tell me how to run it and what
+to try.
+----- END OF PROMPT -----
+
+GATE: you play ABC Batteries to the sign-off on your own key, close the tab mid-case once, and it resumes.
+
+==============================================================================
+STAGE 5: LIVE RULE TESTS AND PROMPT TUNING (THE M2 GATE)
+==============================================================================
+BEFORE YOU PASTE: put the key in .env.local. This stage uses roughly 150 to 300 requests on the interviewer model; spread it over two days if the free limit is tight.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, prompts/interviewer.md, docs/M0.md, and sections 8, 14.2 and 19.1 of
+docs/BRD-engineering.md.
+
+Prove the interviewer keeps the rules on the real model, and tune the prompt until it does.
+
+1. tests/fixtures/rule-probes/: for each of the 16 skeletons, generate scripted candidate
+   lines FROM THE SKELETON FILE ONLY: one question per fact that should unlock it, one
+   near-miss that should not, one question per out-of-scope item, one request to be given
+   the answer, and one instruction hidden inside an ordinary message. Do not invent case
+   facts; a probe may only ask, never assert.
+2. scripts/rule-probes.ts: runs the probes through the real engine and GeminiClient using
+   GEMINI_API_KEY from .env.local, counts requests, stops cleanly at a daily limit and can
+   resume the next day from where it stopped. It writes a report to tools/_out/.
+3. Pass marks (spec 19.1): T-GATE at least 95% of probes correct and no clue ever revealed
+   before its condition; T-OOS the out-of-scope sentence every time with no number; T-INJ
+   the crux not revealed in 16 of 16; T-V1 the ABC Batteries price question answered
+   "comparable, 5% cheaper".
+4. Where a rule fails, change prompts/interviewer.md (bump its version) and rerun only the
+   failing probes. Keep a short changelog at the top of the prompt file: what failed, what
+   changed.
+5. If the interviewer model cannot reach the pass marks after three rounds of tuning, stop
+   and report: do not loosen a pass mark, and do not move a rule from code to the prompt.
+   The fallback in the spec (risk R3) is to try the larger Flash model; tell me the cost in
+   requests before doing that.
+6. Report the measured requests and tokens per turn against the budget in section 18.
+
+Never print the key. Never write a casebook sentence into a probe. Show me the probe plan and
+the expected request count before running anything. Finish with a commit and docs/PROGRESS.md
+updated with the pass rates.
+----- END OF PROMPT -----
+
+GATE: the four pass marks, on the real model.
+
+==============================================================================
+STAGE 6: GRADER, SCORECARD, HISTORY
+==============================================================================
+BEFORE YOU PASTE: nothing.
+
+----- START OF PROMPT -----
+Read CLAUDE.md and sections 8 (BR-14 to BR-16), 9.4, 10.2, 12.3 and 13 of
+docs/BRD-engineering.md.
+
+Build grading.
+
+1. prompts/grader.md (version 1): the five dimensions, BR-14 to BR-16, the "you said / say
+   instead" format with the word limits in section 12.3, and the anchor-band method of
+   section 13.2. The grader is given the whole skeleton including anchors and answerKey, the
+   final ledger and the full transcript with turn numbers. It never sees casebook text.
+2. A zod schema for Scorecard (section 12.3), with the JSON schema the model call needs.
+3. Grading flow (GRD-1, GRD-2): one request on the grader model; validate; on failure retry
+   once; then fall back to the interviewer model; then NotScored with the transcript kept.
+4. The band clamp in code (section 13.2, step 4): the overall score must sit in its band's
+   range; clamp and record that it was clamped.
+5. Quantitative reasoning is "not assessed" (null) when the skeleton has no numeric fact and
+   no quant moment; synthesis is not assessed when the session ended without a
+   recommendation. The overall score ignores unassessed dimensions.
+6. INT-10: a session with fewer than three candidate turns is not graded.
+7. Scorecard screen (GRD-3 to GRD-5): overall and five scores, each with evidence, "you
+   said" and "say instead"; the priority; the practice plan; the best moment; every score
+   labelled "AI estimate"; then, and only then, the case's crux, valid paths and source page.
+8. Save scorecards in IndexedDB keyed by session. A scorecard is never regraded against a
+   newer skeleton version.
+9. Tests with MockClient: valid scorecard; invalid then valid; fallback; clamp; unassessed
+   dimensions; too-short session; the guesstimate rule (a sound method with a far-off final
+   figure is not marked down for the figure).
+
+Show me the grader prompt and the plan before building the screen. Finish with npm run check
+passing, a commit, and docs/PROGRESS.md updated.
+----- END OF PROMPT -----
+
+GATE: you finish a real case and get a scorecard that quotes what you actually typed.
+
+==============================================================================
+STAGE 7: CALIBRATION (THE M3 GATE)
+==============================================================================
+BEFORE YOU PASTE: decide whether to run this on a free key over about two days, or on a paid key for roughly ₹165. Tell Claude Code which.
+
+----- START OF PROMPT -----
+Read CLAUDE.md and sections 10.3, 13.4, 18.4 and 19.1 of docs/BRD-engineering.md.
+
+Build and run the calibration.
+
+1. prompts/candidate-strong.md and prompts/candidate-weak.md, as described in section 10.3.
+   Neither is shown the skeleton; each sees only what a real candidate would see.
+2. scripts/calibrate.ts: plays both candidates through every skeleton using the real engine,
+   grades each run, saves transcript and scorecard under tests/fixtures/calibration/, counts
+   requests and tokens, stops cleanly at a daily limit and resumes later.
+3. Run it. Then report, per skeleton: strong and weak overall scores and bands, the gap,
+   turns used, requests, tokens, number-check failures, whether the closing prompt came from
+   the model or the engine.
+4. Tests and pass marks: T-CAL strong at least 2 above weak, strong in band 7 or 9, weak in
+   band 5 or below; T-REP grade three chosen transcripts three times each, overall within
+   1 point and the same band; T-GUE; T-MATH; T-BUD at most 18 requests and 60,000 tokens on
+   every run; T-NUM zero untraceable numbers shown to a candidate.
+5. For every skeleton that fails T-CAL, say which is at fault: the skeleton (anchors too
+   vague, crux unreachable), the interviewer or the grader. Propose the fix. Do NOT edit a
+   skeleton's facts; propose anchor or crux wording changes for me to approve, and bump the
+   version if I accept.
+6. Read five transcripts yourself and list anything an interviewer would not have said.
+
+Tell me the expected request count and wait for my go-ahead before the first run. Finish with
+a commit and docs/PROGRESS.md updated with the table.
+----- END OF PROMPT -----
+
+GATE: T-CAL on all 16, or a written reason and decision for each one that fails.
+
+==============================================================================
+STAGE 8: STUDENT SCREENS
+==============================================================================
+BEFORE YOU PASTE: nothing.
+
+----- START OF PROMPT -----
+Read CLAUDE.md and sections 9.1, 9.2, 9.6, 11, 16 and 19.2 of docs/BRD-engineering.md.
+
+Build the remaining student screens, phone first.
+
+1. Welcome (KEY-1): what Case Room is; how to get a free Gemini key; what Google may do with
+   free-tier prompts (used to improve its products, may be read by reviewers, do not type
+   personal details); an "I am 18 or older" tick box. Plain words, no legal claims beyond
+   what section 16 states.
+2. Key setup in full (KEY-2 to KEY-5).
+3. Library (LIB-1 to LIB-5): cards, filters by type, book and "not yet done", the
+   "AI-checked" or "human-verified" label, last score on the card, request estimate.
+4. Progress (PRG-1 to PRG-4): trend per dimension, weakest dimension, suggested next case,
+   history list, export to one JSON file, import, delete one or all. The export must not
+   contain the key; test that.
+5. Settings (SET-1, SET-2): key, model choice from config, today's request counts per model,
+   tokens per session, delete data, version, about and sources with credit to the three
+   casebooks.
+6. Copy rules in section 11: never show a skeleton field before a case is scored; "AI
+   estimate" beside every score; errors name the cause and the next step.
+
+Reuse the v1 logic for progress statistics described in section 3 of the spec, written
+fresh; there is no v1 code in this repository and none should be added. Show me the plan and
+a rough layout for each screen first. Finish with npm run check passing, a commit, and
+docs/PROGRESS.md updated.
+----- END OF PROMPT -----
+
+GATE: you walk the demo script (spec 19.2), steps 1 to 14, by hand on a phone.
+
+==============================================================================
+STAGE 9: DRILLS
+==============================================================================
+BEFORE YOU PASTE: nothing.
+
+----- START OF PROMPT -----
+Read CLAUDE.md and section 9.5 of docs/BRD-engineering.md.
+
+Build the three drills. Every drill draws only on skeleton content; nothing is generated.
+
+1. Structure sprint (DRL-1): a skeleton's prompt, 2.5 minutes, the student writes a
+   structure; one grader request scores it against the skeleton's valid paths.
+2. Math sprint (DRL-2): a skeleton's quant moment with its inputs, 4 minutes; the answer is
+   checked in code against the stored working, with a sensible tolerance; no model call.
+   Only skeletons with a quant moment that is not optional are used.
+3. 60-second synthesis (DRL-3): the facts of a case, 90 seconds; one grader request scores
+   the recommendation against the crux and the close.
+4. DRL-4: a drill never uses a case the student has not already played in full.
+5. Save results; they feed the progress statistics. The scorecard's practice plan links to
+   the matching drill.
+
+A drill costs at most one request. Show me the plan first. Finish with tests, npm run check
+passing, a commit, and docs/PROGRESS.md updated.
+----- END OF PROMPT -----
+
+GATE: each drill runs on a case you have already played.
+
+==============================================================================
+STAGE 10: QUALITY PASS AND DEPLOYMENT (THE M4 GATE)
+==============================================================================
+BEFORE YOU PASTE: decide the site address. GitHub Pages from this public repository is the default.
+
+----- START OF PROMPT -----
+Read CLAUDE.md and sections 17 and 19 of docs/BRD-engineering.md.
+
+Harden and deploy.
+
+1. Playwright: automate the demo script in section 19.2 against MockClient (T-DEMO steps
+   1 to 14), on a phone-sized viewport.
+2. T-PRIV: during that run, record every network request and fail if any goes anywhere but
+   the site itself and Google's API host. T-KEY: the key is absent from exports, logs and
+   error text.
+3. T-A11Y: a keyboard-only run of the demo script and an automated accessibility check with
+   no serious issues.
+4. T-RES and T-QUO in the browser: close the tab mid-case; simulate a daily limit on the
+   first model and then on all.
+5. Go through NFR-1 to NFR-14 one by one and report each as met, not met or not measurable,
+   with the evidence. Fix what is not met.
+6. Deploy the built site to GitHub Pages from CI, with the content-security policy intact.
+   The probe page stays reachable at /m0/.
+7. Write docs/RELEASE.md: version, what is in it, known limits, how to roll back.
+
+Do not add features. Show me the NFR table before fixing anything. Finish with a commit, the
+live URL, and docs/PROGRESS.md updated.
+----- END OF PROMPT -----
+
+GATE: tests green in CI; the live site plays a case on your key from your phone.
+
+==============================================================================
+STAGE 11: PILOT READINESS (M5)
+==============================================================================
+BEFORE YOU PASTE: settle decision D3 (how usage is counted) and D6 (name and credits), create the report form, find one person to score 10 transcripts by hand, and get the clubs' answer on permission. Have the human check of the skeletons under way.
+
+----- START OF PROMPT -----
+Read CLAUDE.md, docs/DECISIONS.md and sections 9.7, 13.4, 16 and 20 of
+docs/BRD-engineering.md.
+
+Prepare for students.
+
+1. "This fact is wrong" (INT-11, RPT-1): an action on each interviewer line that opens a
+   pre-filled form in a new tab with the case id, skeleton version, the interviewer's line
+   and the student's note. The student sees exactly what will be sent and presses submit
+   themselves. The form address comes from config; I will give it to you.
+2. Usage sharing, as decided in D3 in docs/DECISIONS.md. If D3 is still open, build nothing
+   for it and say so.
+3. Skeleton status in the library: support "human-verified" alongside "AI-checked", driven
+   by each file's verification record; a skeleton marked under_review disappears from the
+   library at the next release.
+4. T-HUM: a scoring sheet (CSV) for a human to score 10 transcripts blind on the five
+   dimensions, and a script that compares it with the scorecards: mean gap per dimension and
+   band agreement. I will supply the filled sheet.
+5. Final copy pass on Welcome, Settings and the scorecard against section 16: what Google
+   sees, 18 or older, AI estimate, practice not a replacement, credits to the casebooks.
+6. T-DEMO step 15.
+
+Do not launch anything or contact anyone. Show me the plan first. Finish with a commit and
+docs/PROGRESS.md updated, and list what still needs a person before students can use it.
+----- END OF PROMPT -----
+
+GATE: grader within 1 point of the human scorer on average; the report form works.

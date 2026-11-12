@@ -1,0 +1,159 @@
+{
+  "id": "iima-abc-batteries",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "ABC Batteries",
+  "type": "profitability",
+  "source": {
+    "book": "IIM Ahmedabad Consult Club Casebook 2025-26",
+    "pages": "57",
+    "note": "Transcript and approach page"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Our client ABC Batteries is an Indian battery manufacturer whose profits have been declining for the past 6 months. Identify the core issue and suggest recommendations.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Products",
+      "reveal": "Two kinds: AA/AAA for remotes and electronic appliances, and D-cell for torches.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Which product is declining",
+      "reveal": "D-cell battery sales have been declining.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Value chain and distribution",
+      "reveal": "ABC manufactures. Its sales executives reach regional distributors and wholesalers, who supply the retailers: local electrical shops.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Which markets ABC sells in",
+      "reveal": "India only. If the candidate infers that D-cell buyers are mainly in Tier-II cities and rural areas, confirm it.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Industry-wide or just us; the competitive landscape",
+      "reveal": "Just ABC. Two major players in D-cells: ABC has 30% share, XYZ has 50%, and the rest is fragmented. XYZ's profits have risen over the same period.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Geography of the decline",
+      "reveal": "The decline is across India; some geographies are more affected than others.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Revenue or cost",
+      "reveal": "Costs are constant; D-cell revenue has declined.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Price or volume",
+      "reveal": "The number of units sold has decreased.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "Demand or supply",
+      "reveal": "Customer demand has decreased.",
+      "kind": "fact"
+    },
+    {
+      "id": "f10",
+      "asks": "Our product and price compared with XYZ",
+      "reveal": "Comparable product specifications and post-purchase benefits. ABC sells at a 5% lower retail price, and always has.",
+      "kind": "fact"
+    },
+    {
+      "id": "f11",
+      "asks": "Where to focus, once the candidate has laid out the customer's purchase journey",
+      "reveal": "Focus mainly on awareness of the product.",
+      "kind": "probe"
+    },
+    {
+      "id": "f12",
+      "asks": "Awareness, the point of sale, retailers or the sales team",
+      "reveal": "In one of the major markets ABC's sales executives left the company. The new ones lack the retailers' trust, so retailers push XYZ to customers who do not ask for a brand.",
+      "kind": "clue",
+      "condition": "Only once the candidate looks at awareness or the point of sale"
+    },
+    {
+      "id": "f13",
+      "asks": "What XYZ has done differently, or why buyers keep choosing XYZ",
+      "reveal": "In the past year XYZ launched torches pan-India, sold bundled with its D-cell batteries. Customers repurchase the same brand of cells when they run out.",
+      "kind": "clue",
+      "condition": "Only once the candidate looks at awareness or the point of sale"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Any rupee figure: sales, profit, or the size of the decline",
+    "Market size",
+    "Retailer count",
+    "Advertising spend",
+    "Leakage or failure rates",
+    "Recent product changes"
+  ],
+  "crux": {
+    "statement": "The switch happens at the shop counter, not in the product. Two causes: lost retailer push after sales-team churn, and XYZ's torch bundle locking in repeat purchases.",
+    "clue": "XYZ grows while ABC falls, though ABC's product is comparable and cheaper. So the gap is in how the battery reaches the buyer.",
+    "test": "Remove \"XYZ's profits rose\" and the candidate can blame a shrinking market. Remove \"comparable and 5% cheaper\" and they chase price or quality. Both facts are load-bearing."
+  },
+  "paths": [
+    "Profit → revenue → volume → demand → customer journey (need, awareness, purchase) → awareness of a low-involvement buyer",
+    "Down the distribution chain: sales executive → distributor → retailer"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Product quality or leakage (no data, and flat costs argue against it)"
+    },
+    {
+      "id": "w02",
+      "text": "Electrification killing torch demand (that would hit XYZ too)"
+    }
+  ],
+  "quant": {
+    "kind": "none"
+  },
+  "answerKey": [
+    "Answer the torch bundle: launch a torch line if feasible, or partner with torch brands; advertise the D-cell as price-competitive and compatible with every torch",
+    "Rebuild retailer trust: experienced local sales hires, key opinion leaders, cash or trade discount schemes, trust-building workshops"
+  ],
+  "close": {
+    "condition": "The candidate names both causes, or finds the second after one nudge.",
+    "prompt": "Now suggest some recommendations on how to resolve this."
+  },
+  "anchors": {
+    "s5": "Stays on product or generic marketing. The interviewer has to reveal both causes.",
+    "s7": "Uses the competitor comparison to reach the retailer. Finds one cause; recommendations are generic.",
+    "s9": "Goes to the point of sale unprompted, finds both causes, and ties a fix to each. Checks whether a torch launch is feasible before recommending it."
+  },
+  "verifierFlags": [
+    {
+      "text": "No quant moment in the source: add one or keep the case qualitative?",
+      "resolved": true,
+      "decision": "Keep it qualitative. Nothing is added."
+    },
+    {
+      "text": "The transcript says some geographies are hit harder; the approach page says very little geography-related impact.",
+      "resolved": true,
+      "decision": "Follow the transcript."
+    }
+  ]
+}

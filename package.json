@@ -1,0 +1,24 @@
+{
+  "name": "case-room",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Case Room: AI case-interview practice on verified Case Skeletons, run in the browser on the student's own Gemini key.",
+  "scripts": {
+    "validate": "tsx scripts/validate-skeletons.ts",
+    "lint:skeletons": "tsx scripts/lint-skeletons.ts",
+    "index": "tsx scripts/build-index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run validate && npm run lint:skeletons && npm run index && npm run m0 && npm run verification && npm run test",
+    "m0": "tsx scripts/build-m0.ts",
+    "verification": "tsx scripts/build-verification.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "zod": "^3.23.8"
+  }
+}

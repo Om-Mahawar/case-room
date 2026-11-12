@@ -1,0 +1,148 @@
+{
+  "id": "iima-post-merger-workforce",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Post-Merger Workforce Integration",
+  "type": "unconventional",
+  "source": {
+    "book": "IIM Ahmedabad Consult Club Casebook 2025-26",
+    "pages": "256-257",
+    "note": "Transcript on p256, approach page on p257"
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "The client is a legacy newspaper player that has recently acquired a digital media firm. They seek your advice on the integration of both companies.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Each firm's offering and the goal of the acquisition",
+      "reveal": "The client prints a national daily with a pan-India presence. Because readership growth is stagnant at 1–2%, they wanted to move into the digital space. The acquired firm mainly covers entertainment news for a younger internet audience and has a mobile application. Its revenue is about 50% of the client's, and it is poised to grow at 10% a year, compounded, over the next 10 years.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Which problem to work on, once the candidate has laid out the areas of integration",
+      "reveal": "This seems comprehensive. Focus on people-related and systems-related issues. The client wants to know how to allocate the workforce in the combined entity.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Current organisation structure",
+      "reveal": "Both firms have marketing, legal, finance and HR consolidated at their headquarters. The legacy firm lacks a digital-strategy function, which the newer firm has, but it has distributor-relations and publishing functions. The legacy firm has a geographic divisional structure, with each region a distinct profit centre and content generated at the regional level. The digital firm's content generation is split by type: entertainment, tech, business and so on.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "After the organisation facts",
+      "reveal": "Based on this, how would you integrate the workforce?",
+      "kind": "probe"
+    },
+    {
+      "id": "f05",
+      "asks": "After the candidate proposes a separate digital division",
+      "reveal": "Why do you recommend a separate division for it? What else do you suggest with the organisational structure?",
+      "kind": "probe"
+    },
+    {
+      "id": "f06",
+      "asks": "Size of the overlap, when the candidate raises redundancy",
+      "reveal": "Assume 60% of roles in overlapping functions are redundant post-integration. How would you proceed?",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "After the candidate proposes a fitment test",
+      "reveal": "How do you assess who will be better suited for each role? What should be done with those in redundant roles who don't clear the fitment test?",
+      "kind": "probe"
+    },
+    {
+      "id": "f08",
+      "asks": "After redundancy",
+      "reveal": "Highlight briefly a few initiatives to improve the integration of employees in the merged entity.",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [
+    "Digital at 10% a year for 10 years becomes about 2.5 times its size; print grows about 15% in total"
+  ],
+  "outOfScope": [
+    "Headcounts",
+    "Salaries",
+    "Revenue in rupees",
+    "Severance costs",
+    "Labour-law specifics",
+    "The names of either firm"
+  ],
+  "crux": {
+    "statement": "Structure follows growth. Digital gets its own division (autonomy, accountability, authority) next to a Traditional division that keeps its regional structure. A unified content-strategy team spans both, headquarters functions are consolidated, and digital reuses regional content.",
+    "clue": "The growth gap: 10% a year for digital against 1–2% for print."
+  },
+  "paths": [
+    "New structure → redundancy elimination → integration initiatives (the source's route)",
+    "Any sequence that settles structure before cutting roles"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Folding both firms into one structure"
+    },
+    {
+      "id": "w02",
+      "text": "Immediate layoffs"
+    },
+    {
+      "id": "w03",
+      "text": "Ignoring the growth differential"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "working": "Derived: 1.1 to the power 10 is about 2.6 times for digital; print at 1–2% for 10 years is about 1.10 to 1.22 times. With digital starting at 50% of print's revenue: 0.5 × 2.6 = 1.3 against about 1.1 to 1.2, so digital overtakes print within the decade.",
+    "answer": "Digital grows about 2.6 times and overtakes print within the decade",
+    "inputs": [
+      "10%",
+      "1–2%",
+      "50%",
+      "10 years"
+    ]
+  },
+  "answerKey": [
+    "Redundancy: a fitment test by seniority (junior roles on technical skills, middle managers on interpersonal skills, leadership on conceptual skills)",
+    "Evidence from external feedback (peers, superiors, subordinates, panels) and internal records (ratings, trajectory, situational or technical tests)",
+    "Those who do not clear it: an alternative role at the same level, the option to step down a level, or temporary roles; layoffs last",
+    "Employee level: training and development (equal pay and incentives across divisions, cross-training, access to management, knowledge sharing) and redressal (personal channels, cross-firm engagement sessions)",
+    "Organisation level: resource symmetry (systems, technology, processes) and culture symmetry (working styles, norms)"
+  ],
+  "close": {
+    "condition": "The candidate has proposed a structure and a way to handle redundant roles.",
+    "prompt": "Summarise your recommendation on structure, redundancy and integration."
+  },
+  "anchors": {
+    "s5": "A generic HR integration list.",
+    "s7": "A sensible structure and a fitment process.",
+    "s9": "Uses the growth maths to justify the separate division, gives a humane redundancy sequence, and names specific integration initiatives."
+  },
+  "verifierFlags": [
+    {
+      "text": "60% of overlapping roles redundant in the transcript (p256); 50% on the approach page (p257).",
+      "resolved": true,
+      "decision": "Use 60%, the transcript's figure."
+    },
+    {
+      "text": "\"Bringing in 50% of the client's revenue\" is ambiguous.",
+      "resolved": true,
+      "decision": "Read as: the digital firm's revenue is about half of the print firm's. The candidate's maths (digital overtakes print within a decade) only works on this reading."
+    },
+    {
+      "text": "In the transcript the candidate, not the interviewer, lists the four integration areas.",
+      "resolved": true,
+      "decision": "The interviewer does not list them. A correction to the BRD's section 4 is already proposed there."
+    }
+  ]
+}

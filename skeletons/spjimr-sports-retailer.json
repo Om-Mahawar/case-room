@@ -1,0 +1,149 @@
+{
+  "id": "spjimr-sports-retailer",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Sports Retailer",
+  "type": "growth",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "126-127",
+    "firm": "Deloitte USI",
+    "note": "The book labels this \"Sports Manufacturer\"; the client is a retailer."
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "Your client is a sports retailer. They see strong opportunity in the post-COVID world and want growth recommendations. What would you do?",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Formats",
+      "reveal": "Primarily offline physical stores, with limited online.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Categories",
+      "reveal": "Footwear and apparel make up most of sales; equipment is small but growing.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Footprint",
+      "reveal": "Mostly metros and some Tier 1.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Price positioning",
+      "reveal": "Mid-priced.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Competition",
+      "reveal": "Information on competition is irrelevant.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Growth target and appetite",
+      "reveal": "They want to double revenue in 18–24 months. Organic first; inorganic if it accelerates results.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Can prices rise",
+      "reveal": "Any increase in price would lead to customers shifting to competition.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Order value and repeat purchase",
+      "reveal": "Order value is quite low: about ₹850 on average, around the price of a dry-fit T-shirt. There aren't many customers coming back.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "After basket and frequency",
+      "reveal": "Going back to acquiring new customers, how would you do that?",
+      "kind": "probe"
+    },
+    {
+      "id": "f10",
+      "asks": "After existing markets",
+      "reveal": "What about new markets? How would you scale there?",
+      "kind": "probe"
+    },
+    {
+      "id": "f11",
+      "asks": "After organic levers",
+      "reveal": "What other things can the client look at?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Competitors",
+    "Revenue in rupees",
+    "Store count",
+    "Footfall",
+    "Margins"
+  ],
+  "crux": {
+    "statement": "Price is locked, so doubling has to come first from basket size (₹850 is low) and frequency (few come back), then from new customers and places. The post-COVID fitness shift is why home fitness and athleisure are the right new categories.",
+    "clue": "\"Order value is quite low… there aren't many customers coming back.\""
+  },
+  "paths": [
+    "Revenue per customer (price, basket, frequency) × number of customers (existing markets, new markets, new segments), then inorganic options"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Raising prices"
+    },
+    {
+      "id": "w02",
+      "text": "Jumping straight to Tier 2 and 3 expansion"
+    },
+    {
+      "id": "w03",
+      "text": "Spending time on competitors"
+    }
+  ],
+  "quant": {
+    "kind": "none"
+  },
+  "answerKey": [
+    "Basket: bundles and kits, accessory zones at checkout",
+    "Frequency: loyalty, seasonal category refreshes",
+    "New customers: local events, gym partnerships, services, new categories, new segments (kids, women, corporates), compact stores in smaller cities",
+    "Inorganic, last: a fitness app, a home-fitness maker, academy or school joint ventures"
+  ],
+  "close": {
+    "condition": "The candidate has identified basket and frequency as the gap and covered customer acquisition.",
+    "prompt": "What are your final recommendations to the client?"
+  },
+  "anchors": {
+    "s5": "A long, unprioritised list of ideas.",
+    "s7": "Structured levers, with basket and frequency identified as the gap.",
+    "s9": "Prioritises by the facts given, sequences organic before inorganic, and checks whether the levers can plausibly reach 2X."
+  },
+  "verifierFlags": [
+    {
+      "text": "No quant moment in the source; an illustration (customers × basket × visits must multiply to 2) was suggested.",
+      "resolved": true,
+      "decision": "No quant moment. The interviewer does not ask for one; a candidate who checks feasibility unprompted is credited at the top anchor."
+    },
+    {
+      "text": "The book labels the case \"Sports Manufacturer\".",
+      "resolved": true,
+      "decision": "Titled Sports Retailer, as the prompt says."
+    }
+  ]
+}

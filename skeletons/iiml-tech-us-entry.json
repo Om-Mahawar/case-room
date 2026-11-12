@@ -1,0 +1,99 @@
+{
+  "id": "iiml-tech-us-entry",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Tech company enters the US",
+  "type": "market_entry",
+  "source": {
+    "book": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences",
+    "pages": "134-135",
+    "firm": "EY-Parthenon",
+    "note": "Real interview write-up"
+  },
+  "confidence": "low",
+  "runMode": "drill",
+  "prompt": "A tech-based company wants to enter the US market. Give a framework for entry.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "The company",
+      "reveal": "A tech-based company that develops apps.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Target country",
+      "reveal": "USA.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Scale of operations in India",
+      "reveal": "A small-sized company.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Limits on time or money",
+      "reveal": "No such restrictions.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Which part of the framework to focus on",
+      "reveal": "No, go ahead and tell me the important points.",
+      "kind": "fact"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Revenue",
+    "Products in detail",
+    "Competitors",
+    "Budget figures",
+    "US regulation"
+  ],
+  "crux": {
+    "statement": "A small app firm cannot take on the US market head-on. The stronger answer enters through backend support or services for US firms rather than independently, and says why that fits a small company.",
+    "clue": "The interviewer wants \"the important points\", not a full framework: the round tests whether the candidate prioritises quickly."
+  },
+  "paths": [
+    "Why enter → where and whom to serve → how to enter (services or business-to-business, partnership, own product)",
+    "Any short, prioritised structure that uses the fact that the company is small"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Reciting a long generic framework"
+    },
+    {
+      "id": "w02",
+      "text": "Proposing a direct consumer launch with heavy marketing spend"
+    }
+  ],
+  "quant": {
+    "kind": "none"
+  },
+  "close": {
+    "condition": "The candidate has named a mode of entry.",
+    "prompt": "Summarise your recommended mode of entry, your reasons and the main risk."
+  },
+  "anchors": {
+    "s5": "Generic framework that never uses the facts.",
+    "s7": "Clear structure and a mode, with some link to size.",
+    "s9": "Brief and prioritised; a low-risk entry justified by small scale; names what would need checking before going further."
+  },
+  "verifierFlags": [
+    {
+      "text": "The write-up does not record the interviewer's reaction to the answer, and the same interview went on to an ATM guesstimate and a kulfi-stall case.",
+      "resolved": true,
+      "decision": "Run as a 10-minute framework drill. The follow-on cases are not built for the pilot."
+    }
+  ]
+}

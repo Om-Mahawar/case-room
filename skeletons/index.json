@@ -1,0 +1,178 @@
+[
+  {
+    "id": "iima-abc-batteries",
+    "version": 1,
+    "title": "ABC Batteries",
+    "type": "profitability",
+    "source": "IIM Ahmedabad Consult Club Casebook 2025-26, p57",
+    "firm": null,
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-potato-chips",
+    "version": 1,
+    "title": "Potato Chips Manufacturer",
+    "type": "profitability",
+    "source": "SPJIMR Consulting Casebook 2026-27, p39-41",
+    "firm": "Kearney",
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "iiml-tech-us-entry",
+    "version": 1,
+    "title": "Tech company enters the US",
+    "type": "market_entry",
+    "source": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences, p134-135",
+    "firm": "EY-Parthenon",
+    "confidence": "low",
+    "runMode": "drill",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-pet-food",
+    "version": 1,
+    "title": "Pet-Food Manufacturer",
+    "type": "market_entry",
+    "source": "SPJIMR Consulting Casebook 2026-27, p90-92",
+    "firm": "BCG",
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-cough-syrup",
+    "version": 1,
+    "title": "New Cough Syrup (BronchSure)",
+    "type": "pricing",
+    "source": "SPJIMR Consulting Casebook 2026-27, p148-150",
+    "firm": "Citibank",
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-vistara-business",
+    "version": 1,
+    "title": "Business-class fare on a domestic route (Vistara)",
+    "type": "pricing",
+    "source": "SPJIMR Consulting Casebook 2026-27, p153-154",
+    "firm": null,
+    "confidence": "low",
+    "runMode": "drill",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-fire-extinguisher",
+    "version": 1,
+    "title": "Fire Extinguisher Can Manufacturer",
+    "type": "growth",
+    "source": "SPJIMR Consulting Casebook 2026-27, p115-117",
+    "firm": "BCG",
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-sports-retailer",
+    "version": 1,
+    "title": "Sports Retailer",
+    "type": "growth",
+    "source": "SPJIMR Consulting Casebook 2026-27, p126-127",
+    "firm": "Deloitte USI",
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "iiml-paytm-tech-dd",
+    "version": 1,
+    "title": "Paytm technical due diligence",
+    "type": "m_and_a",
+    "source": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences, p137-138",
+    "firm": "EY-Parthenon",
+    "confidence": "low",
+    "runMode": "drill",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-gym-nutrition",
+    "version": 1,
+    "title": "Gym chain buys a nutrition firm",
+    "type": "m_and_a",
+    "source": "SPJIMR Consulting Casebook 2026-27, p160-161",
+    "firm": "Deloitte USI",
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "iiml-paracetamol",
+    "version": 1,
+    "title": "Paracetamol tablets in India",
+    "type": "guesstimate",
+    "source": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences, p136-137",
+    "firm": "EY-Parthenon",
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-water-bottles",
+    "version": 1,
+    "title": "Water bottles in a 5-star hotel",
+    "type": "guesstimate",
+    "source": "SPJIMR Consulting Casebook 2026-27, p27-28",
+    "firm": "General Electric",
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-elevator",
+    "version": 1,
+    "title": "Elevator Manufacturer",
+    "type": "operations",
+    "source": "SPJIMR Consulting Casebook 2026-27, p199-201",
+    "firm": "Kearney",
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-pharma-stockouts",
+    "version": 1,
+    "title": "Pharmaceuticals Stockouts",
+    "type": "operations",
+    "source": "SPJIMR Consulting Casebook 2026-27, p209-211",
+    "firm": null,
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "iima-post-merger-workforce",
+    "version": 1,
+    "title": "Post-Merger Workforce Integration",
+    "type": "unconventional",
+    "source": "IIM Ahmedabad Consult Club Casebook 2025-26, p256-257",
+    "firm": null,
+    "confidence": "medium",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  },
+  {
+    "id": "spjimr-ev-bike",
+    "version": 1,
+    "title": "Should your uncle buy an EV bike?",
+    "type": "unconventional",
+    "source": "SPJIMR Consulting Casebook 2026-27, p187-188",
+    "firm": "Alvarez & Marsal",
+    "confidence": "high",
+    "runMode": "full",
+    "checkedBy": "AI-checked"
+  }
+]

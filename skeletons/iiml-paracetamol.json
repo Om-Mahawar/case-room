@@ -1,0 +1,120 @@
+{
+  "id": "iiml-paracetamol",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Paracetamol tablets in India",
+  "type": "guesstimate",
+  "source": {
+    "book": "IIM Lucknow Casebook 2025-26, EY-Parthenon interview experiences",
+    "pages": "136-137",
+    "firm": "EY-Parthenon",
+    "note": "Real interview write-up"
+  },
+  "confidence": "medium",
+  "runMode": "full",
+  "prompt": "Estimate the number of paracetamol tablets consumed in India in a year, then the market size.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Retail only, or hospital use as well",
+      "reveal": "Consider both retail and hospital use.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Population as the baseline with average consumption per person",
+      "reveal": "Yes, that's a good approach.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "After the candidate reaches a tablet count",
+      "reveal": "How would you calculate the market size?",
+      "kind": "probe"
+    },
+    {
+      "id": "f04",
+      "asks": "After the market size",
+      "reveal": "Would you validate these numbers?",
+      "kind": "probe"
+    },
+    {
+      "id": "f05",
+      "asks": "After the check",
+      "reveal": "So, what's your final estimate?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [
+    "India's population is about 1.4 billion",
+    "60% of the population takes paracetamol in a year",
+    "10 tablets per user per year",
+    "₹1 per tablet"
+  ],
+  "outOfScope": [
+    "Real sales data",
+    "Brand shares",
+    "Hospital consumption figures",
+    "Pack prices",
+    "Prevalence statistics"
+  ],
+  "crux": {
+    "statement": "The segmentation decides the grade. The source uses one average; a stronger answer splits by need (fever, pain, post-operative) or by age band, and treats the hospital channel separately, since the interviewer asked for it to be included.",
+    "clue": "\"Consider both retail and hospital use.\""
+  },
+  "paths": [
+    "Demand side: population → users → episodes → tablets per episode, split by retail and hospital",
+    "A supply-side cross-check as a bonus, not the main route"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Starting from the supply side with no data"
+    },
+    {
+      "id": "w02",
+      "text": "Dropping the hospital channel"
+    },
+    {
+      "id": "w03",
+      "text": "Agonising over the exact population"
+    }
+  ],
+  "quant": {
+    "kind": "chain",
+    "working": "The source's chain: 60% of 1.4 billion = 840 million users × 10 tablets = 8.4 billion tablets a year. At ₹1 a tablet that is ₹8.4 billion, about ₹840 crore. Sanity check, derived: 8.4 billion ÷ 1.4 billion = 6 tablets per person per year.",
+    "answer": "One reasonable result: 8.4 billion tablets and about ₹840 crore. Grade the approach, never the distance from this figure.",
+    "inputs": [
+      "1.4 billion",
+      "60%",
+      "10 tablets",
+      "₹1"
+    ]
+  },
+  "answerKey": [
+    "A tablet estimate, a market size and one real sanity check",
+    "The sensitivity of the answer to its biggest assumption"
+  ],
+  "close": {
+    "condition": "The candidate has a tablet count and a market size.",
+    "prompt": "So, what's your final estimate?"
+  },
+  "anchors": {
+    "s5": "One-line multiplication, no segments, no sanity check.",
+    "s7": "A clear chain that covers both retail and hospital use, with a sanity check attempted.",
+    "s9": "Segmented by need or age, hospital use separated, a sanity check by triangulation, and the sensitivity to the biggest assumption stated."
+  },
+  "verifierFlags": [
+    {
+      "text": "The same page holds a second guesstimate (government MBA admissions, approach only).",
+      "resolved": true,
+      "decision": "Not built for the pilot."
+    }
+  ]
+}

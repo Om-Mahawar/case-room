@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src https://generativelanguage.googleapis.com; base-uri 'none'; form-action 'none'">
+<title>Case Room: M0 Gemini probe</title>
+<style>
+  :root { --bg:#fbfaf7; --ink:#1d1c1a; --quiet:#6b6860; --line:#dcd9d0; --card:#ffffff; --accent:#1f5fbf; --good:#1b7a43; --bad:#b3261e; --warn:#8a5a00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161513; --ink:#ecebe6; --quiet:#a3a097; --line:#3a3833; --card:#1f1e1b; --accent:#7fb0ff; --good:#6fd08e; --bad:#ff8a80; --warn:#f0c060; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 0 0 8px; }
+  p { margin: 0 0 10px; }
+  .quiet { color: var(--quiet); }
+  section { background: var(--card); border:1px solid var(--line); border-radius: 10px; padding: 16px; margin: 16px 0; }
+  label { display:block; font-weight:600; margin: 8px 0 4px; }
+  input[type=password], input[type=text], select, textarea { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--ink); font: inherit; }
+  textarea { min-height: 220px; font: 12.5px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  button { font: inherit; font-weight:600; padding: 9px 14px; border-radius: 8px; border:1px solid var(--accent); background: var(--accent); color:#fff; cursor:pointer; margin: 8px 8px 0 0; }
+  button.secondary { background: transparent; color: var(--accent); }
+  button:disabled { opacity:.5; cursor: default; }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .row { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+  ul.results { list-style:none; padding:0; margin: 10px 0 0; }
+  ul.results li { padding: 6px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+  .pass { color: var(--good); font-weight: 600; }
+  .fail { color: var(--bad); font-weight: 600; }
+  .info { color: var(--warn); font-weight: 600; }
+  code { font: 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Case Room: M0 Gemini probe</h1>
+  <p class="quiet">Checks whether a browser can run a skeleton-driven interviewer turn on your own Gemini key. It makes about 10 requests. Your key stays in this tab's memory: it is not saved, and it is sent only to <code>generativelanguage.googleapis.com</code>.</p>
+
+  <section>
+    <h2>1. Key and models</h2>
+    <label for="key">Gemini API key</label>
+    <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste a key from Google AI Studio">
+    <button id="btn-models">List models</button>
+    <div class="row">
+      <div><label for="model-int">Interviewer model</label><select id="model-int"></select></div>
+      <div><label for="model-grd">Grader model</label><select id="model-grd"></select></div>
+    </div>
+    <ul class="results" id="out-models" aria-live="polite"></ul>
+  </section>
+
+  <section>
+    <h2>2. Interviewer turns on both models</h2>
+    <p class="quiet">Three questions on the ABC Batteries skeleton: a fact in the case, a fact that is out of scope, and an attempt to make the interviewer give the answer away. Six requests.</p>
+    <button id="btn-turns" disabled>Run the three turns</button>
+    <ul class="results" id="out-turns" aria-live="polite"></ul>
+  </section>
+
+  <section>
+    <h2>3. Thinking tokens</h2>
+    <p class="quiet">Tries to turn thinking down on the interviewer model and reports the token counts. Three requests.</p>
+    <button id="btn-think" disabled>Run the thinking test</button>
+    <ul class="results" id="out-think" aria-live="polite"></ul>
+  </section>
+
+  <section>
+    <h2>4. What a limit error looks like (optional)</h2>
+    <p class="quiet">Sends tiny requests to the interviewer model one after another until Google returns a limit error, or 20 have been sent. This uses up to 20 of today's requests on that model. Skip it if you want to keep them.</p>
+    <button id="btn-limit" class="secondary" disabled>Run the limit test</button>
+    <ul class="results" id="out-limit" aria-live="polite"></ul>
+  </section>
+
+  <section>
+    <h2>5. Your real limits</h2>
+    <p class="quiet">Open the rate-limit page in Google AI Studio (aistudio.google.com/rate-limit) and copy what it shows for the two models.</p>
+    <div class="row">
+      <div><label for="lim-int">Interviewer model: per minute / per day</label><input id="lim-int" type="text" placeholder="e.g. 15 / 500"></div>
+      <div><label for="lim-grd">Grader model: per minute / per day</label><input id="lim-grd" type="text" placeholder="e.g. 5 / 20"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Report</h2>
+    <p class="quiet">Copy this and paste it back to Claude. It does not contain your key.</p>
+    <textarea id="report" readonly aria-label="Probe report"></textarea>
+    <button id="btn-copy" class="secondary">Copy report</button>
+    <span id="copied" class="quiet" aria-live="polite"></span>
+  </section>
+</main>
+<script src="data.js"></script>
+<script src="probe.js"></script>
+</body>
+</html>

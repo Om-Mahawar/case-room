@@ -1,0 +1,176 @@
+{
+  "id": "spjimr-ev-bike",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Should your uncle buy an EV bike?",
+  "type": "unconventional",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "187-188",
+    "firm": "Alvarez & Marsal"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Your uncle needs advice on whether to buy an EV bike that costs more than a conventional motorcycle. You can begin.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "How long he will keep the bike",
+      "reveal": "He plans to keep it for 5 years.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Purchase prices",
+      "reveal": "An EV costs ₹1,20,000, while a comparable petrol bike costs ₹80,000.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Distance ridden",
+      "reveal": "He rides 6,000 km a year.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Fuel cost and mileage",
+      "reveal": "Petrol is ₹100 a litre and the bike does 50 km per litre.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Electricity cost and efficiency",
+      "reveal": "Electricity is ₹8 per kWh and the EV does 60 km per kWh.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "Maintenance",
+      "reveal": "Maintenance per year: petrol ₹5,000, EV ₹2,000.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Resale after 5 years",
+      "reveal": "Scrap value after 5 years: petrol ₹8,000, EV ₹20,000.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Battery",
+      "reveal": "The battery is 40% of the EV's cost.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "If the candidate gives an undiscounted total",
+      "reveal": "You didn't discount future savings.",
+      "kind": "probe"
+    },
+    {
+      "id": "f10",
+      "asks": "After the discounted figure",
+      "reveal": "Any cash flows you might have missed?",
+      "kind": "probe"
+    },
+    {
+      "id": "f11",
+      "asks": "After the battery point",
+      "reveal": "What about the risk of battery failure? What would you recommend?",
+      "kind": "probe"
+    },
+    {
+      "id": "f12",
+      "asks": "Before closing",
+      "reveal": "Explore the other side briefly: what specific considerations might actually make you suggest a petrol bike?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [
+    "A discount rate of about 8%",
+    "A partial battery replacement of about ₹30,000",
+    "Electricity rising to ₹12–14 per kWh as a sensitivity"
+  ],
+  "outOfScope": [
+    "Subsidies",
+    "Warranty terms",
+    "Battery degradation curves",
+    "Insurance",
+    "Loan rates",
+    "Specific models"
+  ],
+  "crux": {
+    "statement": "The EV wins on paper, but the whole margin is about the size of one battery. So the decision hinges on battery warranty and life, plus sensitivity to distance ridden, the electricity tariff, the petrol price and access to charging.",
+    "clue": "\"Any cash flows you might have missed?\""
+  },
+  "paths": [
+    "Five-year total cost of ownership: upfront premium, running-cost saving, resale, then risks",
+    "A payback-period framing that reaches the same risks"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Comparing sticker prices only"
+    },
+    {
+      "id": "w02",
+      "text": "Ignoring resale"
+    },
+    {
+      "id": "w03",
+      "text": "No discounting"
+    },
+    {
+      "id": "w04",
+      "text": "Missing the battery"
+    }
+  ],
+  "quant": {
+    "kind": "chain",
+    "working": "Petrol: 6,000 ÷ 50 = 120 litres × ₹100 = ₹12,000 + ₹5,000 = ₹17,000 a year. EV: 6,000 ÷ 60 = 100 kWh × ₹8 = ₹800 + ₹2,000 = ₹2,800 a year. Saving ₹14,200 a year, ₹71,000 over 5 years. Resale advantage ₹20,000 − ₹8,000 = ₹12,000. Less the ₹1,20,000 − ₹80,000 = ₹40,000 premium: +₹43,000 for the EV. Discounted at 8%: annuity factor 3.993 gives ₹56,700; resale gap at present value about ₹8,200; net about +₹24,900 (the source rounds to ₹24,700). Battery = 40% × ₹1,20,000 = ₹48,000, so one full replacement turns +₹43,000 into about −₹5,000.",
+    "answer": "+₹43,000 undiscounted; about +₹24,900 at 8%; a ₹48,000 battery replacement removes the advantage",
+    "inputs": [
+      "₹1,20,000",
+      "₹80,000",
+      "6,000 km",
+      "₹100",
+      "50 km",
+      "₹8",
+      "60 km",
+      "₹5,000",
+      "₹2,000",
+      "₹8,000",
+      "₹20,000",
+      "40%",
+      "5 years"
+    ]
+  },
+  "answerKey": [
+    "A conditional recommendation: buy the EV if the battery warranty covers 5 years or replacement is cheap; otherwise the petrol bike",
+    "What would flip it: lower distance ridden, a higher electricity tariff, a lower petrol price, poor charging access",
+    "Non-financial factors: range anxiety, charging time, resale-market maturity",
+    "The book's feedback: discounting without the interviewer's nudge would have given a better impression"
+  ],
+  "close": {
+    "condition": "The candidate has a total cost of ownership and has addressed the battery.",
+    "prompt": "So, should he buy it? Give me your recommendation."
+  },
+  "anchors": {
+    "s5": "Compares sticker prices only.",
+    "s7": "A correct 5-year total cost of ownership.",
+    "s9": "Discounts unprompted, finds the battery risk, gives a conditional recommendation (buy if the warranty is 5 years or more), and states the conditions for petrol."
+  },
+  "verifierFlags": [
+    {
+      "text": "60 km per kWh is optimistic for real two-wheelers (roughly 25–40).",
+      "resolved": true,
+      "decision": "Kept as written: it is the interviewer's figure in the book. At 30 km per kWh charging is ₹1,600 a year and the conclusion does not change."
+    }
+  ]
+}

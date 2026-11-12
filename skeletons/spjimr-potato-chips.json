@@ -1,0 +1,189 @@
+{
+  "id": "spjimr-potato-chips",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Potato Chips Manufacturer",
+  "type": "profitability",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "39-41",
+    "firm": "Kearney"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Your client is a national potato chips manufacturer. Their profitability has declined in the last three years. Diagnose the issue.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "Revenue or cost",
+      "reveal": "Costs have been rising.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Where in the value chain",
+      "reveal": "Largely on the procurement side.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Potatoes specifically",
+      "reveal": "Yes, potato procurement cost has been rising.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Market price of potatoes",
+      "reveal": "Market prices have gone down over the same period.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Plants",
+      "reveal": "Four plants: one each in the North, South, East and West.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "How buying is organised",
+      "reveal": "Mostly plant by plant, with some coordination.",
+      "kind": "fact"
+    },
+    {
+      "id": "f07",
+      "asks": "Number of suppliers",
+      "reveal": "Around a hundred.",
+      "kind": "fact"
+    },
+    {
+      "id": "f08",
+      "asks": "Where the suppliers are",
+      "reveal": "About eighty operate locally near individual plants; twenty supply nationally.",
+      "kind": "fact"
+    },
+    {
+      "id": "f09",
+      "asks": "Spend split",
+      "reveal": "Roughly fifty-fifty between local and national suppliers.",
+      "kind": "fact"
+    },
+    {
+      "id": "f10",
+      "asks": "Has the sourcing mix changed",
+      "reveal": "Not materially.",
+      "kind": "fact"
+    },
+    {
+      "id": "f11",
+      "asks": "Spoilage or quality rejects",
+      "reveal": "That's possible, but not the primary concern.",
+      "kind": "fact"
+    },
+    {
+      "id": "f12",
+      "asks": "Supplier margins",
+      "reveal": "Hard to say directly.",
+      "kind": "fact"
+    },
+    {
+      "id": "f13",
+      "asks": "Variation by plant",
+      "reveal": "Yes. One plant shows a particularly sharp rise: the East plant.",
+      "kind": "fact"
+    },
+    {
+      "id": "f14",
+      "asks": "Contract type",
+      "reveal": "Mostly short-term contracting.",
+      "kind": "fact"
+    },
+    {
+      "id": "f15",
+      "asks": "Quality specifications",
+      "reveal": "Yes, the client introduced stricter quality grading two years ago.",
+      "kind": "fact"
+    },
+    {
+      "id": "f16",
+      "asks": "When the candidate says suppliers have location-specific bargaining power",
+      "reveal": "Location-specific bargaining power? Explain.",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Any rupee cost",
+    "Margins",
+    "Volumes",
+    "Potato prices in rupees",
+    "Plant-level spend"
+  ],
+  "crux": {
+    "statement": "The client pays more while the market pays less, so the problem is how it buys, not what it buys. Many small local suppliers with no scale, short-term contracts that never pass on falling prices, location power at the East plant, and stricter grading passed through as price.",
+    "clue": "\"Market prices have gone down.\" The contradiction should stop the candidate from blaming the commodity.",
+    "test": "Remove the falling market price and the case collapses into \"potatoes got expensive\". Remove the 80/20 supplier split and the scale argument has no support."
+  },
+  "paths": [
+    "Value chain → procurement → parts of procurement cost (base price, transport, losses, rejects, supplier margin) → supplier structure and contracts",
+    "Start from the plant-level variance and work back to supplier structure"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Weather or crop prices"
+    },
+    {
+      "id": "w02",
+      "text": "Transport (the sourcing mix has not changed)"
+    },
+    {
+      "id": "w03",
+      "text": "Spoilage (not the main driver)"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "optional": true,
+    "working": "Derived from the given facts: each local supplier gets on average 50% ÷ 80 of spend and each national one 50% ÷ 20, so national orders are 4 times larger.",
+    "answer": "National orders are 4 times larger on average",
+    "inputs": [
+      "eighty",
+      "twenty",
+      "fifty"
+    ]
+  },
+  "answerKey": [
+    "Consolidate suppliers toward fewer, scalable aggregators",
+    "Sign longer contracts to lock in falling prices",
+    "Run competitive bids across plants",
+    "Realign the grading standard with its cost",
+    "Act on the East plant specifically"
+  ],
+  "close": {
+    "condition": "The candidate has linked at least two of the four drivers to the rising cost.",
+    "prompt": "Pull this all together for me."
+  },
+  "anchors": {
+    "s5": "Spots procurement but explains it with the commodity price. Needs the contradiction pointed out.",
+    "s7": "Uses the contradiction and finds two drivers, such as supplier fragmentation and short contracts.",
+    "s9": "Spots from the 80/50 split that orders are small, asks about plant variance and contracts without prompting, and links each fix to a driver."
+  },
+  "verifierFlags": [
+    {
+      "text": "The 4-times order-size check is derived, not in the source: keep or drop?",
+      "resolved": true,
+      "decision": "Keep it as an optional check the grader may reward. The interviewer does not ask for it."
+    },
+    {
+      "text": "The source interviewer says \"you're thinking along the right lines\" before it is earned.",
+      "resolved": true,
+      "decision": "Dropped. The supplier-margin fact is only \"hard to say directly\"."
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "id": "spjimr-fire-extinguisher",
+  "version": 1,
+  "status": "verified",
+  "verification": {
+    "method": "ai_second_pass",
+    "by": "Claude",
+    "on": "2026-11-12",
+    "note": "Second pass against the source pages. Not yet checked by a person; shown to students as AI-checked."
+  },
+  "title": "Fire Extinguisher Can Manufacturer",
+  "type": "growth",
+  "source": {
+    "book": "SPJIMR Consulting Casebook 2026-27",
+    "pages": "115-117",
+    "firm": "BCG"
+  },
+  "confidence": "high",
+  "runMode": "full",
+  "prompt": "Your client is the CEO of a fire-extinguisher can manufacturing company. They want to grow only in India and are seeking your advice.",
+  "facts": [
+    {
+      "id": "f01",
+      "asks": "History and markets",
+      "reveal": "They have operated only in India for the past 20 years. They make the standard red extinguishers with black nozzles.",
+      "kind": "fact"
+    },
+    {
+      "id": "f02",
+      "asks": "Growth target",
+      "reveal": "The CEO wants to triple the company's revenue, from X to 3X, in just 2 years.",
+      "kind": "fact"
+    },
+    {
+      "id": "f03",
+      "asks": "Market share and competition",
+      "reveal": "The client holds 50% market share. Two other major competitors have 25% and 15%. The remaining 10% is fragmented among many small players.",
+      "kind": "fact"
+    },
+    {
+      "id": "f04",
+      "asks": "Industry growth",
+      "reveal": "The industry is growing at around 10% a year.",
+      "kind": "fact"
+    },
+    {
+      "id": "f05",
+      "asks": "Customer segments, once the candidate lists some",
+      "reveal": "You're missing two significant ones: petrol pumps and factories dealing with highly combustible materials.",
+      "kind": "fact"
+    },
+    {
+      "id": "f06",
+      "asks": "When the candidate starts on a generic organic and inorganic framework",
+      "reveal": "Skip the generic framework for now. Focus on the numbers given. Do you think the client is missing something?",
+      "kind": "probe"
+    },
+    {
+      "id": "f07",
+      "asks": "After the candidate offers growth options",
+      "reveal": "Is there a way to increase the frequency of customer purchases? Most companies buy extinguishers once and forget about them.",
+      "kind": "probe"
+    },
+    {
+      "id": "f08",
+      "asks": "After the frequency discussion",
+      "reveal": "How can we address the fragmented 10% of the market?",
+      "kind": "probe"
+    }
+  ],
+  "acceptedAssumptions": [],
+  "outOfScope": [
+    "Revenue in rupees",
+    "Prices",
+    "Margins",
+    "Replacement-cycle data",
+    "Named acquisition targets"
+  ],
+  "crux": {
+    "statement": "The target exceeds the market's ceiling. Say so plainly to the CEO, then go beyond the core: adjacent fire-safety products, recurring revenue (refills, maintenance contracts, subscriptions for high-risk sites), under-served segments, and a roll-up of the fragmented 10%.",
+    "clue": "\"Skip the generic framework. Focus on the numbers. Is the client missing something?\"",
+    "test": "Remove the 10% industry growth or the 50% share and the feasibility test cannot be done."
+  },
+  "paths": [
+    "Test the target against the market first, then options beyond the core",
+    "Revenue per customer (price, size, frequency) × customers, reaching the ceiling through the numbers"
+  ],
+  "wrongTurns": [
+    {
+      "id": "w01",
+      "text": "Listing organic and inorganic levers without testing whether 3X is feasible"
+    },
+    {
+      "id": "w02",
+      "text": "Assuming more share is enough"
+    }
+  ],
+  "quant": {
+    "kind": "single",
+    "working": "In 2 years the market is 1.1 × 1.1 = 1.21 times today's size. 3X revenue at a 50% share = 1.5 times today's market. Even a 100% share gives 1.21, which is less than 1.5, so 3X cannot happen inside extinguishers.",
+    "answer": "Market ceiling 1.21 against a need of 1.5: the 3X target is not reachable in the core market",
+    "inputs": [
+      "10%",
+      "50%",
+      "3X",
+      "2 years"
+    ]
+  },
+  "answerKey": [
+    "Tell the CEO directly that 3X is not achievable in the core market",
+    "Expand into adjacent fire-safety products and services",
+    "Build recurring revenue from the replacement cycle: maintenance, refills, subscriptions",
+    "Acquire or partner with small regional players in the fragmented 10%"
+  ],
+  "close": {
+    "condition": "The candidate has tested the target against the market and offered options beyond it.",
+    "prompt": "What are your final recommendations to the client?"
+  },
+  "anchors": {
+    "s5": "Lists generic growth levers and never tests the target.",
+    "s7": "Does the 1.21 against 1.5 maths after the nudge, then gives sensible options.",
+    "s9": "Tests the target unprompted, tells the CEO directly, and leads with recurring revenue from the replacement cycle."
+  },
+  "verifierFlags": [
+    {
+      "text": "The summary slide says the primary customers are petrol pumps and factories; the transcript says these were two segments the candidate missed.",
+      "resolved": true,
+      "decision": "Follow the transcript."
+    }
+  ]
+}
